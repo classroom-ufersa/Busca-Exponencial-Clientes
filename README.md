@@ -1,2 +1,6 @@
 # Busca-Exponencial-Clientes
-Busca de Clientes com Busca Exponencial
+COMPONENTES:
+- Pedro Henrique Andrade da Conceição
+- Pedro Lucas de Souza Ferreira
+- Nattan Ferreira Lopes
+- Samuel de Almeida Saturno
