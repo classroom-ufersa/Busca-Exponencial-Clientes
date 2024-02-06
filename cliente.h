@@ -1,1 +1,1 @@
-criação de arquivo cliente.h.
+typedef struct cliente Cliente;
