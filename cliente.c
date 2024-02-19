@@ -5,7 +5,7 @@
 struct cliente{
     char nome[80];
     char endereco[80];
-    int cod_cliente;
+    int id_cliente;
 };
 
 int preencher_clientes(FILE * arquivo,Cliente * cliente){
