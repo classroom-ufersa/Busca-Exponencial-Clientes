@@ -1,3 +1,4 @@
+#include<stdio.h>
 typedef struct cliente Cliente;
 
 int Contagem_clientes(FILE * arquivo);
