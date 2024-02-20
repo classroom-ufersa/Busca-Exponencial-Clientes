@@ -1,7 +1,5 @@
 /*TAD: Cliente*/
 #include"cliente.h"
-#include<stdio.h>
-#include<stdlib.h>
 struct cliente{
     char nome[80];
     char endereco[80];
