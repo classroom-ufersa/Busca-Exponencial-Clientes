@@ -1,23 +1,24 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include <ctype.h>
 #include"cliente.c"
 
 
-int main(void){
-    int index=0,id_cliente,busca_cod_cliente,numero_clientes;
-    char nome[80],busca_nome,endereco[80],ler[80];
 
-    FILE * aLista=fopen("Lista clientes.txt","rt");
+int main(void){
+    int index=0,id_cliente,numero_clientes;
+    char nome[80],endereco[80],linha[100],opcao,opcao2;
+
+    FILE * aLista=fopen("Lista clientes.txt","r");
     numero_clientes=Contagem_clientes(aLista);
     Cliente ** cliente=(Cliente**)malloc(numero_clientes*sizeof(Cliente*));
+<<<<<<< HEAD
     while(!(feof(aLista))){
         fscanf(aLista,"%20[^\t]\t%20[^\t]\t%d",nome,endereco,&id_cliente);
+=======
+    while(fgets(linha,100,aLista) != NULL){
+        sscanf(linha,"%[^\t]%[^\t]%d\n",nome,endereco,id_cliente);
+>>>>>>> 3918cf9e6160ac8b392c0aeb2505b927c7513c58
         cliente[index] = preencher_clientes(nome,endereco,id_cliente);
         index++;
     }
-
-    char opcao,opcao2;
     do{
         printf("MENU\n");
         printf("1-Cadastrar novo cliente\n2-Buscar por nome\n3-Buscar por código\n4-Mostrar lista de clientes\n5-Sair");
@@ -29,7 +30,7 @@ int main(void){
             numero_clientes++;
             printf("Adicionar novo cliente?\n(S) ou (N)\n");
             scanf("%c",&opcao2);
-            toupper(opcao2); //transforma o caracter em maiúsculo
+            opcao2 = toupper(opcao2); //transforma o caracter em maiúsculo
             } while (opcao2=='S');
             break;
         case '2':
