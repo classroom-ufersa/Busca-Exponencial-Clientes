@@ -8,18 +8,16 @@ struct cliente{
     int id_cliente;
 };
 
-void preencher_clientes(FILE * arquivo,Cliente * cliente){
-    char ler[50];
-    int index=0;
-    while ((fgets(ler, 50, arquivo)) != NULL){
-        sscanf(ler,"%20[^\t]\t%20[^\t]\t%d", cliente[index].nome,cliente[index].endereco,&cliente[index].id_cliente);
-        index++;
-    }
+Cliente * preencher_clientes(const char* nome,const char* endereco,int id_cliente){
+    Cliente * cliente=(Cliente*)malloc(sizeof(Cliente));
+    strcpy(cliente->nome,nome);
+    strcpy(cliente->endereco,endereco);
+    cliente->id_cliente=id_cliente;
+    return cliente;
 }
 
 int Contagem_clientes(FILE * arquivo){
-    int numero_clientes;
-    numero_clientes=0;
+    int numero_clientes=0;
     while(!(feof(arquivo))){
         numero_clientes++;
     }
