@@ -5,12 +5,12 @@
 
 
 int main(void){
-    int index=0,id_cliente,busca_cod_cliente,numero_clientes;
-    char nome[80],busca_nome,endereco[80],ler[80];
+    int index=0,id_cliente,numero_clientes;
+    char nome[80],endereco[80];
 
     FILE * aLista=fopen("Lista clientes.txt","rt");
     numero_clientes=Contagem_clientes(aLista);
-    Cliente * cliente=(Cliente*)malloc(numero_clientes*sizeof(Cliente*));
+    Cliente ** cliente=(Cliente**)malloc(numero_clientes*sizeof(Cliente*));
     while(!(feof(aLista))){
         fscanf(aLista,"%20[^\t]\t%20[^\t]\t%d",nome,endereco,&id_cliente);
         cliente[index] = preencher_clientes(nome,endereco,id_cliente);
@@ -29,7 +29,7 @@ int main(void){
             numero_clientes++;
             printf("Adicionar novo cliente?\n(S) ou (N)\n");
             scanf("%c",&opcao2);
-            toupper(opcao2); //transforma o caracter em maiúsculo
+            opcao2 = toupper(opcao2); //transforma o caracter em maiúsculo
             } while (opcao2=='S');
             break;
         case '2':
