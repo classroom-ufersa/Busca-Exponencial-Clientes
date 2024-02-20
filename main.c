@@ -11,10 +11,12 @@ int main(void){
     FILE * aLista=fopen("Lista clientes.txt","rt");
     numero_clientes=Contagem_clientes(aLista);
     Cliente * cliente=(Cliente*)malloc(numero_clientes*sizeof(Cliente*));
-    preencher_clientes(aLista,cliente);
+    for(index=0;index<numero_clientes;index++){
+        fscanf(aLista,"%20[^\t]\t%20[^\t]\t%d",nome,endereco,&id_cliente);
+        cliente[index]=preencher_clientes(nome,endereco,id_cliente);
+    }
 
-    int opcao;
-    char opcao2;
+    char opcao,opcao2;
     do{
         printf("MENU\n");
         printf("1-Cadastrar novo cliente\n2-Buscar por nome\n3-Buscar por código\n4-Mostrar lista de clientes\n5-Sair");
@@ -25,7 +27,7 @@ int main(void){
             add_clientes(numero_clientes,cliente);
             numero_clientes++;
             printf("Adicionar novo cliente?\n(S) ou (N)\n");
-            scanf("%d",&opcao2);
+            scanf("%c",&opcao2);
             toupper(opcao2); //transforma o caracter em maiúsculo
             } while (opcao2=='S');
             break;
