@@ -8,12 +8,12 @@ struct cliente{
     int id_cliente;
 };
 
-Cliente * preencher_clientes(const char* nome,const char* endereco,int id_cliente){
-    Cliente * cliente=(Cliente*)malloc(sizeof(Cliente));
-    strcpy(cliente->nome,nome);
-    strcpy(cliente->endereco,endereco);
-    cliente->id_cliente=id_cliente;
-    return cliente;
+Cliente * preencher_clientes(char nome[80],char endereco[80],int id_cliente){
+    Cliente * a=(Cliente*)malloc(sizeof(Cliente));
+    strcpy(a->nome,nome);
+    strcpy(a->endereco,endereco);
+    a->id_cliente=id_cliente;
+    return a;
 }
 
 int Contagem_clientes(FILE * arquivo){

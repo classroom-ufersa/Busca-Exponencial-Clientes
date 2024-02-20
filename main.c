@@ -5,15 +5,16 @@
 
 
 int main(void){
-    int index,id_cliente,busca_cod_cliente,numero_clientes;
+    int index=0,id_cliente,busca_cod_cliente,numero_clientes;
     char nome[80],busca_nome,endereco[80],ler[80];
 
     FILE * aLista=fopen("Lista clientes.txt","rt");
     numero_clientes=Contagem_clientes(aLista);
     Cliente * cliente=(Cliente*)malloc(numero_clientes*sizeof(Cliente*));
-    for(index=0;index<numero_clientes;index++){
+    while(!(feof(aLista))){
         fscanf(aLista,"%20[^\t]\t%20[^\t]\t%d",nome,endereco,&id_cliente);
-        cliente[index]=preencher_clientes(nome,endereco,id_cliente);
+        cliente[index] = preencher_clientes(nome,endereco,id_cliente);
+        index++;
     }
 
     char opcao,opcao2;

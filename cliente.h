@@ -5,4 +5,4 @@ int Contagem_clientes(FILE * arquivo);
 
 void add_clientes(int numero_clientes,Cliente *cliente);
 
-Cliente * preencher_clientes(const char* nome,const char* endereco,int id_cliente);
+Cliente * preencher_clientes(char nome[80],char endereco[80],int id_cliente);
