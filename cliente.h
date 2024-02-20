@@ -17,3 +17,8 @@ void OrganizarNome(Cliente ** cliente,int numero_clientes);
 int BuscaExponencialID(Cliente ** cliente,int id_busca,int numero_clientes);
 
 int BuscaExponencialNome(Cliente ** cliente,char nome_busca[80],char numero_clientes);
+
+int BuscaBinariaNome();
+
+int BuscaBinariaID();
+
