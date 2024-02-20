@@ -7,7 +7,7 @@ int main(void){
     int index,cod_cliente,busca_cod_cliente,numero_clientes;
     char nome[80],busca_nome,endereco[80];
     FILE * aLista=fopen("Lista clientes.txt","rt");
-    Numero_clientes(aLista,numero_clientes);
+    numero_clientes=Contagem_clientes(aLista);
     Cliente * cliente=(Cliente*)malloc(numero_clientes*sizeof(Cliente*));
     preencher_clientes(aLista,cliente);
     int opcao,opcao2;
