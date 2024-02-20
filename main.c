@@ -24,7 +24,7 @@ int main(void){
             do{
             add_clientes(numero_clientes,cliente);
             numero_clientes+1;
-            printf("Adicionar novo cliente?\n1-Sim\n2-Não");
+            printf("Adicionar novo cliente?\n(S) ou (N)\n");
             scanf("%d",&opcao2);
             toupper(opcao2); //transforma o caracter em maiúsculo
             } while (opcao2=='S');
