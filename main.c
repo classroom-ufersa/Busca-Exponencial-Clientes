@@ -9,13 +9,8 @@ int main(void){
     FILE * aLista=fopen("Lista clientes.txt","r");
     numero_clientes=Contagem_clientes(aLista);
     Cliente ** cliente=(Cliente**)malloc(numero_clientes*sizeof(Cliente*));
-<<<<<<< HEAD
     while(!(feof(aLista))){
         fscanf(aLista,"%20[^\t]\t%20[^\t]\t%d",nome,endereco,&id_cliente);
-=======
-    while(fgets(linha,100,aLista) != NULL){
-        sscanf(linha,"%[^\t]%[^\t]%d\n",nome,endereco,id_cliente);
->>>>>>> 3918cf9e6160ac8b392c0aeb2505b927c7513c58
         cliente[index] = preencher_clientes(nome,endereco,id_cliente);
         index++;
     }
