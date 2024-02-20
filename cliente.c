@@ -8,7 +8,7 @@ struct cliente{
     int id_cliente;
 };
 
-int preencher_clientes(FILE * arquivo,Cliente * cliente){
+void preencher_clientes(FILE * arquivo,Cliente * cliente){
     char ler[50];
     int index=0;
     while ((fgets(ler, 50, arquivo)) != EOF){
@@ -17,7 +17,8 @@ int preencher_clientes(FILE * arquivo,Cliente * cliente){
     }
 }
 
-int Numero_clientes(FILE * arquivo, int numero_clientes){
+int Contagem_clientes(FILE * arquivo){
+    int numero_clientes;
     numero_clientes=0;
     while(!(feof(arquivo))){
         numero_clientes++;
@@ -34,7 +35,7 @@ void add_clientes(int numero_clientes,Cliente *cliente){
     printf("Informe o codigo do novo cliente");
     scanf("%d",&cliente[(numero_clientes)].id_cliente);
     FILE * arquivo=fopen("Lista clientes.txt","a");
-    fprintf(arquivo,"%s\t%s\t%d",cliente[(numero_clientes)].nome,cliente[(numero_clientes)].endereco,cliente[(numero_clientes)].id_cliente);
+    fprintf(arquivo,"%s\t%s\t%d",cliente[(numero_clientes)].nome,cliente[(numero_clientes)].endereco,cliente[(numero_clientes)].cod_cliente);
 }
 
 
