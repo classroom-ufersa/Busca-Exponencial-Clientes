@@ -36,6 +36,7 @@ void add_clientes(int numero_clientes,Cliente *cliente){
     scanf("%d",&cliente[(numero_clientes)].id_cliente);
     FILE * arquivo=fopen("Lista clientes.txt","a");
     fprintf(arquivo,"%s\t%s\t%d",cliente[(numero_clientes)].nome,cliente[(numero_clientes)].endereco,cliente[(numero_clientes)].id_cliente);
+
     fclose(arquivo);
 }
 
