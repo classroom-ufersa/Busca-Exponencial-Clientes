@@ -25,7 +25,7 @@ int main(void){
             numero_clientes+1;
             printf("Adicionar novo cliente?\n(S) ou (N)\n");
             scanf("%c",&opcao2);
-            toupper(opcao2); //transforma o caracter em maiúsculo
+            opcao2 = toupper(opcao2); //transforma o caracter em maiúsculo
             } while (opcao2=='S');
             break;
         case '2':
