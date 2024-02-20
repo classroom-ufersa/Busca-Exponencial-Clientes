@@ -30,13 +30,16 @@ void add_clientes(int numero_clientes,Cliente *cliente){
     cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
     printf("Informe nome do novo cliente");
     scanf("%[^\n]",cliente[(numero_clientes)].nome);
+
     printf("Informe endeço do novo cliente");
     scanf("%[^\n]",cliente[(numero_clientes)].endereco);
+
     printf("Informe o codigo do novo cliente");
     scanf("%d",&cliente[(numero_clientes)].id_cliente);
+
     FILE * arquivo=fopen("Lista clientes.txt","a");
     fprintf(arquivo,"%s\t%s\t%d",cliente[(numero_clientes)].nome,cliente[(numero_clientes)].endereco,cliente[(numero_clientes)].id_cliente);
-
+    
     fclose(arquivo);
 }
 
