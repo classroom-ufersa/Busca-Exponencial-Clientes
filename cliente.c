@@ -41,4 +41,58 @@ void add_clientes(int numero_clientes,Cliente *cliente){
     fclose(arquivo);
 }
 
+void OrganizarID(Cliente ** cliente,int numero_clientes){
+    int count1,count2;
+    Cliente * a=(Cliente*)malloc(sizeof(Cliente));
+    a=cliente[0];
+    for(count1=0;count1<numero_clientes;count1++){
+        for(count2=0;count2<numero_clientes-1;count2++){
+            if(cliente[count2]->id_cliente>cliente[count2+1]->id_cliente){
+                a=cliente[count2];
+                cliente[count2]=cliente[count2+1];
+                cliente[count2+1]=a;
+
+            }
+        }
+    }
+}
+
+void OrganizarNome(Cliente ** cliente,int numero_clientes){
+    int count1,count2;
+    Cliente * a=(Cliente*)malloc(sizeof(Cliente));
+    a=cliente[0];
+    for(count1=0;count1<numero_clientes;count1++){
+        for(count2=0;count2<numero_clientes-1;count2++){
+            if (strcmp(cliente[count2]->nome, cliente[count2 + 1]->nome) > 0){
+                a=cliente[count2];
+                cliente[count2]=cliente[count2+1];
+                cliente[count2+1]=a;
+
+            }
+        }
+    }
+}
+
+int BuscaExponencialID(Cliente ** cliente,int id_busca,int numero_clientes){
+    if(id_busca==cliente[0]->id_cliente){
+        return 0;
+    }
+    int i=1;
+    while(i<numero_clientes && id_busca<cliente[i]->id_cliente){
+        i*=2;
+    }
+    return i;
+}
+
+
+int BuscaExponencialNome(Cliente ** cliente,char nome_busca[80],char numero_clientes){
+    if((strcmp(cliente[0]->nome,nome_busca))==0){
+        return 0;
+    }
+    int i=1;
+    while(i<numero_clientes && (strcmp(cliente[i]->nome,nome_busca))<0){
+        i*=2;
+    }
+    return i;
+}
 
