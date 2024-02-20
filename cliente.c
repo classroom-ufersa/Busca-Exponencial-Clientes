@@ -11,7 +11,7 @@ struct cliente{
 void preencher_clientes(FILE * arquivo,Cliente * cliente){
     char ler[50];
     int index=0;
-    while ((fgets(ler, 50, arquivo)) != EOF){
+    while ((fgets(ler, 50, arquivo)) != NULL){
         sscanf(ler,"%20[^\t]\t%20[^\t]\t%d", cliente[index].nome,cliente[index].endereco,&cliente[index].id_cliente);
         index++;
     }
@@ -40,5 +40,3 @@ void add_clientes(int numero_clientes,Cliente *cliente){
 }
 
 
-
-int busca_exponencial(){}

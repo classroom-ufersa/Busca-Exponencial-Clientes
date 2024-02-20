@@ -19,7 +19,7 @@ int main(void){
         case 1:
             do{
             add_clientes(numero_clientes,cliente);
-            numero_clientes+1;
+            numero_clientes++;
             printf("Adicionar novo cliente?\n1-Sim\n2-Não");
             scanf("%d",&opcao2);
             } while (opcao2==1);
