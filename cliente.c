@@ -102,11 +102,11 @@ int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome[81]){
         {
             return mid;
         }
-        if (strcmp(clientes[mid]->nome, nome) == 0)
+        if (strcmp(clientes[mid]->nome, nome) > 0)
         {
-            return BuscaBinariaNome(clientes, begin, mid-1, nome);
+            return BuscaBinariaNome(clientes, mid+1, end, nome);
         }
-        return BuscaBinariaNome(clientes, begin, mid+1, nome); 
+        return BuscaBinariaNome(clientes, begin, mid-1, nome); 
     }
     return -1;
 }
@@ -119,11 +119,11 @@ int BuscaBinariaId(Cliente **clientes, int begin, int end, int id){
         {
             return mid;
         }
-        if (strcmp(clientes[mid]->id_cliente, id) == 0)
+        if (strcmp(clientes[mid]->id_cliente, id) > 0)
         {
-            return BuscaBinariaNome(clientes, begin, mid-1, id);
+            return BuscaBinariaNome(clientes, mid+1, end, id);
         }
-        return BuscaBinariaNome(clientes, begin, mid+1, id); 
+        return BuscaBinariaNome(clientes, begin, mid-1, id); 
     }
     return -1;
 }
