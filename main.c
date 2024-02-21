@@ -9,8 +9,8 @@ int main(void){
     FILE * aLista=fopen("Lista clientes.txt","r");
     numero_clientes=Contagem_clientes(aLista);
     Cliente ** cliente=(Cliente**)malloc(numero_clientes*sizeof(Cliente*));
-    while(!(feof(aLista))){
-        fscanf(aLista,"%20[^\t]\t%20[^\t]\t%d",nome,endereco,&id_cliente);
+    while(fgets(linha,100,aLista) != NULL){
+        sscanf(linha,"%[^\t]%[^\t]%d\n",nome,endereco,id_cliente);
         cliente[index] = preencher_clientes(nome,endereco,id_cliente);
         index++;
     }
@@ -21,6 +21,7 @@ int main(void){
         switch (opcao){
         case '1':
             do{
+            cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
             add_clientes(numero_clientes,cliente);
             numero_clientes++;
             printf("Adicionar novo cliente?\n(S) ou (N)\n");

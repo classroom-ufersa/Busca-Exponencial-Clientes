@@ -16,14 +16,14 @@ Cliente * preencher_clientes(char nome[80],char endereco[80],int id_cliente){
 
 int Contagem_clientes(FILE * arquivo){
     int numero_clientes=0;
-    while(!(feof(arquivo))){
+    char linha[100];
+    while(fgets(linha,100,arquivo) != NULL){
         numero_clientes++;
     }
     return numero_clientes;
 }
 
 void add_clientes(int numero_clientes,Cliente **cliente){
-    cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
     printf("Informe nome do novo cliente");
     scanf("%[^\n]",cliente[(numero_clientes)]->nome);
 
