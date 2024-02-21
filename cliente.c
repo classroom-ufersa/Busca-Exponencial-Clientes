@@ -16,14 +16,14 @@ Cliente * preencher_clientes(char nome[80],char endereco[80],int id_cliente){
 
 int Contagem_clientes(FILE * arquivo){
     int numero_clientes=0;
-    while(!(feof(arquivo))){
+    while(!(fgets(arquivo))){
         numero_clientes++;
     }
     return numero_clientes;
 }
 
 void add_clientes(int numero_clientes,Cliente **cliente){
-    cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
+    cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));    
     printf("Informe nome do novo cliente");
     scanf("%[^\n]",cliente[(numero_clientes)]->nome);
 
@@ -94,3 +94,36 @@ int BuscaExponencialNome(Cliente ** cliente,char nome_busca[80],char numero_clie
     return i;
 }
 
+int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome[81]){
+    if (end>=begin)
+    {
+        int mid = begin + (end-begin)/2;
+        if (strcmp(clientes[mid]->nome, nome) == 0)
+        {
+            return mid;
+        }
+        if (strcmp(clientes[mid]->nome, nome) == 0)
+        {
+            return BuscaBinariaNome(clientes, begin, mid-1, nome);
+        }
+        return BuscaBinariaNome(clientes, begin, mid+1, nome); 
+    }
+    return -1;
+}
+
+int BuscaBinariaId(Cliente **clientes, int begin, int end, int id){
+    if (end>=begin)
+    {
+        int mid = begin + (end-begin)/2;
+        if (strcmp(clientes[mid]->id_cliente, id) == 0)
+        {
+            return mid;
+        }
+        if (strcmp(clientes[mid]->id_cliente, id) == 0)
+        {
+            return BuscaBinariaNome(clientes, begin, mid-1, id);
+        }
+        return BuscaBinariaNome(clientes, begin, mid+1, id); 
+    }
+    return -1;
+}

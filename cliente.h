@@ -18,7 +18,7 @@ int BuscaExponencialID(Cliente ** cliente,int id_busca,int numero_clientes);
 
 int BuscaExponencialNome(Cliente ** cliente,char nome_busca[80],char numero_clientes);
 
-int BuscaBinariaNome();
+int BuscaBinariaId(Cliente **clientes, int begin, int end, int id);
 
-int BuscaBinariaID();
+int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome[81]);
 
