@@ -94,3 +94,36 @@ int BuscaExponencialNome(Cliente ** cliente,char nome_busca[80],char numero_clie
     return i;
 }
 
+int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome[81]){
+    if (end>=begin)
+    {
+        int mid = begin + (end-begin)/2;
+        if (strcmp(clientes[mid]->nome, nome) == 0)
+        {
+            return mid;
+        }
+        if (strcmp(clientes[mid]->nome, nome) > 0)
+        {
+            return BuscaBinariaNome(clientes, mid+1, end, nome);
+        }
+        return BuscaBinariaNome(clientes, begin, mid-1, nome); 
+    }
+    return -1;
+}
+
+int BuscaBinariaId(Cliente **clientes, int begin, int end, int id){
+    if (end>=begin)
+    {
+        int mid = begin + (end-begin)/2;
+        if (strcmp(clientes[mid]->id_cliente, id) == 0)
+        {
+            return mid;
+        }
+        if (strcmp(clientes[mid]->id_cliente, id) > 0)
+        {
+            return BuscaBinariaNome(clientes, mid+1, end, id);
+        }
+        return BuscaBinariaNome(clientes, begin, mid-1, id); 
+    }
+    return -1;
+}
