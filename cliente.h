@@ -22,4 +22,4 @@ int BuscaBinariaId(Cliente **clientes, int begin, int end, int id);
 
 int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome[81]);
 
-void Exibir_cliente(Cliente ** cliente,int numero_clientes,FILE * arquivo);
+void Exibir_cliente(FILE * arquivo);
