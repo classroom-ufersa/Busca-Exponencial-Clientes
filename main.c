@@ -35,14 +35,14 @@ int main(void){
         case '2':
             OrganizarNome(cliente,numero_clientes);
             printf("Informe o nome");
-            scanf("%[^\n]",nome_busca);
+            scanf(" %[^\n]",nome_busca);
             index_busca=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
             index_busca=BuscaBinariaNome(cliente,index_busca/2,index_busca,nome_busca);
             if(index_busca<0){
-                printf("Erro");
+                printf("Erro\n");
             }
             else{
-                printf("%s",cliente[index_busca]->nome);
+                printf("%s\n",cliente[index_busca]->nome);
             }
             break;
         case '3':
