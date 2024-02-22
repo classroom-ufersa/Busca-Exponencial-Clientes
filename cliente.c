@@ -8,6 +8,9 @@ struct cliente{
 
 Cliente * preencher_clientes(char nome[81],char endereco[81],int id_cliente){
     Cliente * a=(Cliente*)malloc(sizeof(Cliente));
+    if(a == NULL) {
+        printf("erro!");
+    }
     strcpy(a->nome,nome);
     strcpy(a->endereco,endereco);
     a->id_cliente=id_cliente;
@@ -115,27 +118,27 @@ int BuscaBinariaId(Cliente **clientes, int begin, int end, int id_busca){
     if (end>=begin)
     {
         int mid = begin + (end-begin)/2;
-        if (strcmp(clientes[mid]->id_cliente, id_busca) == 0)
+        if (clientes[mid]->id_cliente == id_busca)
         {
             return mid;
         }
-        if (strcmp(clientes[mid]->id_cliente, id_busca) > 0)
+        if (clientes[mid]->id_cliente > id_busca)
         {
-            return BuscaBinariaNome(clientes, mid+1, end, id_busca);
+            return BuscaBinariaId(clientes, mid+1, end, id_busca);
         }
-        return BuscaBinariaNome(clientes, begin, mid-1, id_busca); 
+        return BuscaBinariaId(clientes, begin, mid-1, id_busca); 
     }
     return -1;
 }
 
-void Exibir_cliente(Cliente ** cliente,int numero_clientes,FILE * arquivo){
+void Exibir_cliente(FILE * arquivo){
     char linha[100],nome[81],endereco[81];
     int id_cliente;
+    rewind(arquivo);
     while(fgets(linha,100,arquivo) != NULL){
-        sscanf(linha,"%[^\t]\t%[^\t]\t%d\n",nome,endereco,id_cliente);
-        printf("%s",nome);
-        printf("%s",endereco);
-        printf("%d",id_cliente);
+        sscanf(linha,"%[^\t]\t%[^\t]\t%d\n",nome,endereco,&id_cliente);
+        printf("%s\t",nome);
+        printf("%s\t",endereco);
+        printf("%d\n",id_cliente);
     }
-    printf("teste");
 }
