@@ -1,12 +1,12 @@
 /*TAD: Cliente*/
 #include"cliente.h"
 struct cliente{
-    char nome[80];
-    char endereco[80];
+    char nome[81];
+    char endereco[81];
     int id_cliente;
 };
 
-Cliente * preencher_clientes(char nome[80],char endereco[80],int id_cliente){
+Cliente * preencher_clientes(char nome[81],char endereco[81],int id_cliente){
     Cliente * a=(Cliente*)malloc(sizeof(Cliente));
     strcpy(a->nome,nome);
     strcpy(a->endereco,endereco);
@@ -24,13 +24,13 @@ int Contagem_clientes(FILE * arquivo){
 }
 
 void add_clientes(int numero_clientes,Cliente **cliente){
-    printf("Informe nome do novo cliente");
-    scanf("%[^\n]",cliente[(numero_clientes)]->nome);
+    printf("Informe nome do novo cliente\n");
+    scanf(" %[^\n]",cliente[(numero_clientes)]->nome);
 
-    printf("Informe endeço do novo cliente");
-    scanf("%[^\n]",cliente[(numero_clientes)]->endereco);
+    printf("Informe endeço do novo cliente\n");
+    scanf(" %[^\n]",cliente[(numero_clientes)]->endereco);
 
-    printf("Informe o codigo do novo cliente");
+    printf("Informe o codigo do novo cliente\n");
     scanf("%d",&cliente[(numero_clientes)]->id_cliente);
 
     FILE * arquivo=fopen("Lista clientes->txt","a");
@@ -75,11 +75,11 @@ int BuscaExponencialID(Cliente ** cliente,int id_busca,int numero_clientes){
     if(id_busca==cliente[0]->id_cliente){
         return 0;
     }
-    int i=1;
-    while(i<numero_clientes && id_busca<cliente[i]->id_cliente){
-        i*=2;
+    int end=1;
+    while(end<numero_clientes && id_busca<cliente[end]->id_cliente){
+        end*=2;
     }
-    return i;
+    return end;
 }
 
 
@@ -87,43 +87,55 @@ int BuscaExponencialNome(Cliente ** cliente,char nome_busca[80],char numero_clie
     if((strcmp(cliente[0]->nome,nome_busca))==0){
         return 0;
     }
-    int i=1;
-    while(i<numero_clientes && (strcmp(cliente[i]->nome,nome_busca))<0){
-        i*=2;
+    int end=1;
+    while(end<numero_clientes && (strcmp(cliente[end]->nome,nome_busca))<0){
+        end*=2;
     }
-    return i;
+    return end;
 }
 
-int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome[81]){
+int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome_busca[81]){
     if (end>=begin)
     {
         int mid = begin + (end-begin)/2;
-        if (strcmp(clientes[mid]->nome, nome) == 0)
+        if (strcmp(clientes[mid]->nome, nome_busca) == 0)
         {
             return mid;
         }
-        if (strcmp(clientes[mid]->nome, nome) > 0)
+        if (strcmp(clientes[mid]->nome, nome_busca) > 0)
         {
-            return BuscaBinariaNome(clientes, mid+1, end, nome);
+            return BuscaBinariaNome(clientes, mid+1, end, nome_busca);
         }
-        return BuscaBinariaNome(clientes, begin, mid-1, nome); 
+        return BuscaBinariaNome(clientes, begin, mid-1, nome_busca); 
     }
     return -1;
 }
 
-int BuscaBinariaId(Cliente **clientes, int begin, int end, int id){
+int BuscaBinariaId(Cliente **clientes, int begin, int end, int id_busca){
     if (end>=begin)
     {
         int mid = begin + (end-begin)/2;
-        if (strcmp(clientes[mid]->id_cliente, id) == 0)
+        if (strcmp(clientes[mid]->id_cliente, id_busca) == 0)
         {
             return mid;
         }
-        if (strcmp(clientes[mid]->id_cliente, id) > 0)
+        if (strcmp(clientes[mid]->id_cliente, id_busca) > 0)
         {
-            return BuscaBinariaNome(clientes, mid+1, end, id);
+            return BuscaBinariaNome(clientes, mid+1, end, id_busca);
         }
-        return BuscaBinariaNome(clientes, begin, mid-1, id); 
+        return BuscaBinariaNome(clientes, begin, mid-1, id_busca); 
     }
     return -1;
+}
+
+void Exibir_cliente(Cliente ** cliente,int numero_clientes,FILE * arquivo){
+    char linha[100],nome[81],endereco[81];
+    int id_cliente;
+    while(fgets(linha,100,arquivo) != NULL){
+        sscanf(linha,"%[^\t]\t%[^\t]\t%d\n",nome,endereco,id_cliente);
+        printf("%s",nome);
+        printf("%s",endereco);
+        printf("%d",id_cliente);
+    }
+    printf("teste");
 }
