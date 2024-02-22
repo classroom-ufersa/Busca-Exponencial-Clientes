@@ -1,7 +1,5 @@
 #include"cliente.c"
 
-
-
 int main(void){
     int index=0,id_cliente,numero_clientes,index_busca,id_busca;
     char nome[81],endereco[81],linha[100],opcao,opcao2,nome_busca[81];
@@ -18,7 +16,6 @@ int main(void){
         cliente[index] = preencher_clientes(nome,endereco,id_cliente);
         index++;
     }//da pra colocar esse while em uma função
-    printf("%s", cliente[1]->nome);
     do{
         printf("MENU\n");
         printf("1-Cadastrar novo cliente\n2-Buscar por nome\n3-Buscar por código\n4-Mostrar lista de clientes\n5-Sair\n");
@@ -26,11 +23,12 @@ int main(void){
         switch (opcao){
         case '1':
             do{
+            numero_clientes = Contagem_clientes(aLista);
             cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
             add_clientes(numero_clientes,cliente);
             numero_clientes++;
             printf("Adicionar novo cliente?\n(S) ou (N)\n");
-            scanf("%c",&opcao2);
+            scanf(" %[^\n]",&opcao2);
             opcao2 = toupper(opcao2); //transforma o caracter em maiúsculo
             } while (opcao2=='S');
             break;
