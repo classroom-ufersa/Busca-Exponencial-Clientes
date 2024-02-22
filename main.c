@@ -6,14 +6,19 @@ int main(void){
     int index=0,id_cliente,numero_clientes,index_busca,id_busca;
     char nome[81],endereco[81],linha[100],opcao,opcao2,nome_busca[81];
 
-    FILE * aLista=fopen("Lista clientes.txt","r");
+    FILE * aLista=fopen("listaclientes.txt","r");
     numero_clientes=Contagem_clientes(aLista);
     Cliente ** cliente=(Cliente**)malloc(numero_clientes*sizeof(Cliente*));
+    rewind(aLista);
+    if(cliente == NULL){
+        printf("erro!");
+    }
     while(fgets(linha,100,aLista) != NULL){
-        sscanf(linha,"%[^\t]\t%[^\t]\t%d\n",nome,endereco,id_cliente);
+        sscanf(linha,"%[^\t]\t%[^\t]\t%d\n",nome,endereco,&id_cliente);
         cliente[index] = preencher_clientes(nome,endereco,id_cliente);
         index++;
     }//da pra colocar esse while em uma função
+    printf("%s", cliente[1]->nome);
     do{
         printf("MENU\n");
         printf("1-Cadastrar novo cliente\n2-Buscar por nome\n3-Buscar por código\n4-Mostrar lista de clientes\n5-Sair\n");
@@ -56,7 +61,7 @@ int main(void){
             }
             break;
         case '4':
-            Exibir_cliente(cliente,numero_clientes,aLista);
+            Exibir_cliente(aLista);
             break;
         case '5':
             printf("Ralwu mofi raleu");
