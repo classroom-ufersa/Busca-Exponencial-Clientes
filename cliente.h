@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <math.h>
 typedef struct cliente Cliente;
 
 int Contagem_clientes(FILE * arquivo);
@@ -22,4 +23,6 @@ int BuscaBinariaId(Cliente **clientes, int begin, int end, int id);
 
 int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome[81]);
 
-void Exibir_cliente(FILE * arquivo);
+void capitalizeNames(char *str);
+
+void Exibir_listacliente(FILE * arquivo);

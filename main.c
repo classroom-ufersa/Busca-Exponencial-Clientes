@@ -1,12 +1,16 @@
 #include"cliente.c"
 
 int main(void){
-    int index=0,id_cliente,numero_clientes,index_busca,id_busca;
+    int index=0,id_cliente,numero_clientes,id_busca,posicao;
     char nome[81],endereco[81],linha[100],opcao,opcao2,nome_busca[81];
 
     FILE * aLista=fopen("listaclientes.txt","r");
     numero_clientes=Contagem_clientes(aLista);
     Cliente ** cliente=(Cliente**)malloc(numero_clientes*sizeof(Cliente*));
+    if(cliente == NULL){
+        printf("Erro de memoria");
+        exit(1);
+    }
     rewind(aLista);
     if(cliente == NULL){
         printf("erro!");
@@ -34,35 +38,34 @@ int main(void){
             break;
         case '2':
             OrganizarNome(cliente,numero_clientes);
-            printf("Informe o nome");
+            printf("Informe o nome\n");
             scanf(" %[^\n]",nome_busca);
-            index_busca=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
-            index_busca=BuscaBinariaNome(cliente,index_busca/2,index_busca,nome_busca);
-            if(index_busca<0){
+            posicao=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
+            if(posicao<0){
                 printf("Erro\n");
             }
             else{
-                printf("%s\n",cliente[index_busca]->nome);
+                capitalizeNames(cliente[posicao]->nome);
+                printf("%s\n",cliente[posicao]->nome);
             }
             break;
         case '3':
             OrganizarID(cliente,numero_clientes);
-            printf("Informe o id");
+            printf("Informe o id\n");
             scanf("%d",&id_busca);
-            index_busca=BuscaExponencialID(cliente,id_busca,numero_clientes);
-            index_busca=BuscaBinariaId(cliente,index_busca/2,index_busca,id_busca);
-            if(index_busca<0){
+            posicao=BuscaExponencialID(cliente,id_busca,numero_clientes);
+            if(posicao<0){
                 printf("Erro");
             }
             else{
-                printf("%d",cliente[index_busca]->id_cliente);
+                printf("%s",cliente[posicao]->nome);
             }
             break;
         case '4':
-            Exibir_cliente(aLista);
+            Exibir_listacliente(aLista);
             break;
         case '5':
-            printf("Ralwu mofi raleu");
+            printf("Obrigado pela preferencia");
             break;
         default:
             printf("Opção inválida");

@@ -14,6 +14,10 @@ Cliente *preencher_clientes(char *nome, char *endereco, int id_cliente)
     {
         printf("erro!");
     }
+    int index;
+    for(index=0;index<81;index++){
+        nome[index]=toupper(nome[index]);
+    }
     strcpy(a->nome, nome);
     strcpy(a->endereco, endereco);
     a->id_cliente = id_cliente;
@@ -31,13 +35,21 @@ int Contagem_clientes(FILE *arquivo)
     return numero_clientes;
 }
 
-void add_clientes(int numero_clientes, Cliente **cliente)
-{
+void add_clientes(int numero_clientes, Cliente **cliente){
+    char nome[81],endereco[81];
+    int index;
     printf("Informe nome do novo cliente\n");
-    scanf(" %[^\n]", cliente[(numero_clientes)]->nome);
+    scanf(" %[^\n]", nome);
 
     printf("Informe endeço do novo cliente\n");
-    scanf(" %[^\n]", cliente[(numero_clientes)]->endereco);
+    scanf(" %[^\n]", endereco);
+
+    for(index=0;index<81;index++){
+        nome[index]=toupper(nome[index]);
+        endereco[index]=toupper(endereco[index]);
+    }
+    strcpy(cliente[(numero_clientes)]->nome,nome);
+    strcpy(cliente[(numero_clientes)]->endereco,endereco);
 
     printf("Informe o codigo do novo cliente\n");
     scanf("%d", &cliente[(numero_clientes)]->id_cliente);
@@ -93,41 +105,41 @@ int BuscaExponencialID(Cliente **cliente, int id_busca, int numero_clientes)
         return 0;
     }
     int end = 1;
-    while (end < numero_clientes && id_busca < cliente[end]->id_cliente)
+    while (end < numero_clientes && cliente[end]->id_cliente <= id_busca)
     {
         end *= 2;
     }
-    return end;
+    return BuscaBinariaId(cliente,end/2,fmin(end,numero_clientes-1),id_busca);
 }
 
 int BuscaExponencialNome(Cliente **cliente, char nome_busca[80], char numero_clientes)
 {
+    int index;
+    for(index=0;index<81;index++){
+        nome_busca[index]=toupper(nome_busca[index]);
+    }
     if ((strcmp(cliente[0]->nome, nome_busca)) == 0)
     {
         return 0;
     }
-    int end = 1;
-    while (end < numero_clientes && (strcmp(cliente[end]->nome, nome_busca)) < 0)
-    {
-        end *= 2;
+    int end=1;
+    while(end<numero_clientes && (strcmp(cliente[end]->nome,nome_busca))<=0){
+        end*=2;
     }
-    return end;
+    return BuscaBinariaNome(cliente,end/2,fmin(end,numero_clientes-1),nome_busca);
 }
 
 int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome_busca[81])
 {
-    if (end >= begin)
-    {
-        int mid = begin + (end - begin) / 2;
-        if (strcmp(clientes[mid]->nome, nome_busca) == 0)
-        {
+    if (end >= begin){
+        int mid = begin + ((end - begin) / 2);
+        if (strcmp(clientes[mid]->nome, nome_busca) == 0){
             return mid;
         }
-        if (strcmp(clientes[mid]->nome, nome_busca) > 0)
-        {
-            return BuscaBinariaNome(clientes, mid + 1, end, nome_busca);
+        if (strcmp(clientes[mid]->nome, nome_busca) > 0){
+            return BuscaBinariaNome(clientes,begin,mid-1,nome_busca);
         }
-        return BuscaBinariaNome(clientes, begin, mid - 1, nome_busca);
+        return BuscaBinariaNome(clientes,mid+1,end,nome_busca); 
     }
     return -1;
 }
@@ -136,21 +148,42 @@ int BuscaBinariaId(Cliente **clientes, int begin, int end, int id_busca)
 {
     if (end >= begin)
     {
-        int mid = begin + (end - begin) / 2;
-        if (clientes[mid]->id_cliente == id_busca)
-        {
+        int mid = begin + (end-begin)/2;
+        if (clientes[mid]->id_cliente == id_busca){
             return mid;
         }
-        if (clientes[mid]->id_cliente > id_busca)
-        {
-            return BuscaBinariaId(clientes, mid + 1, end, id_busca);
+        if (clientes[mid]->id_cliente > id_busca){
+            return BuscaBinariaId(clientes,begin,mid-1,id_busca);
+            printf("as0\n");
         }
-        return BuscaBinariaId(clientes, begin, mid - 1, id_busca);
+        return BuscaBinariaId(clientes,mid+1,end,id_busca); 
     }
     return -1;
 }
 
-void Exibir_cliente(FILE *arquivo)
+void capitalizeNames(char *str) {
+    // Indica se a próxima letra deve ser transformada em maiúscula
+    int capitalizeNext = 1;
+
+    // Itera sobre cada caractere na string
+    for (int i = 0; str[i] != '\0'; i++) {
+        // Verifica se o caractere atual é uma letra
+        if (isalpha(str[i])) {
+            // Transforma a letra em maiúscula se necessário
+            if (capitalizeNext) {
+                str[i] = toupper(str[i]);
+                capitalizeNext = 0; // Desativa a transformação para o próximo caractere
+            } else {
+                str[i] = tolower(str[i]);
+            }
+        } else {
+            // Se o caractere não for uma letra, ativa a transformação para o próximo
+            capitalizeNext = 1;
+        }
+    }
+}
+
+void Exibir_listacliente(FILE *arquivo)
 {
     char linha[100], nome[81], endereco[81];
     int id_cliente;
