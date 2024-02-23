@@ -5,8 +5,8 @@ struct cliente{
     char endereco[81];
     int id_cliente;
 };
-
-Cliente * preencher_clientes(char nome[81],char endereco[81],int id_cliente){
+//Cliente * preencher_clientes(char nome[81],char endereco[81],int id_cliente){
+Cliente * preencher_clientes(char *nome,char *endereco,int id_cliente){
     Cliente * a=(Cliente*)malloc(sizeof(Cliente));
     if(a == NULL) {
         printf("erro!");
