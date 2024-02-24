@@ -26,3 +26,5 @@ int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome[81]);
 void capitalizeNames(char *str);
 
 void Exibir_listacliente(FILE * arquivo);
+
+void menu();
