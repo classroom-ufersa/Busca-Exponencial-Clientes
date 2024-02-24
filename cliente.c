@@ -166,15 +166,15 @@ void capitalizeNames(char *str) {
     int capitalizeNext = 1;
 
     // Itera sobre cada caractere na string
-    for (int i = 0; str[i] != '\0'; i++) {
+    for (int index = 0; str[index] != '\0'; index++) {
         // Verifica se o caractere atual é uma letra
-        if (isalpha(str[i])) {
+        if (isalpha(str[index])) {
             // Transforma a letra em maiúscula se necessário
             if (capitalizeNext) {
-                str[i] = toupper(str[i]);
+                str[index] = toupper(str[index]);
                 capitalizeNext = 0; // Desativa a transformação para o próximo caractere
             } else {
-                str[i] = tolower(str[i]);
+                str[index] = tolower(str[index]);
             }
         } else {
             // Se o caractere não for uma letra, ativa a transformação para o próximo
