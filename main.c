@@ -40,7 +40,7 @@ int main(void){
             printf("Informe o nome: ");
             scanf(" %[^\n]",nome_busca);
             posicao=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
-            if(posicao<0){
+            if(posicao < 0){
                 printf("Cliente inexistente\n");
             }
             else{
