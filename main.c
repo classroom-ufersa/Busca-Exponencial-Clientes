@@ -41,7 +41,7 @@ int main(void){
             scanf(" %[^\n]",nome_busca);
             posicao=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
             if(posicao<0){
-                printf("Erro\n");
+                printf("Cliente inexistente\n");
             }
             else{
                 capitalizeNames(cliente[posicao]->nome);
@@ -56,7 +56,7 @@ int main(void){
             scanf("%d",&id_busca);
             posicao=BuscaExponencialID(cliente,id_busca,numero_clientes);
             if(posicao < 0){
-                printf("Erro\n\n");
+                printf("Cliente inexistente\n");
             }
             else{
                 printf("Nome: %s\n",cliente[posicao]->nome);
