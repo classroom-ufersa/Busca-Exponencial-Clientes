@@ -8,5 +8,4 @@ Samuel Saturno	teste7	5
 Leticia Ruiva	teste8	8
 Maria Aparecida	teste9	6
 Maria Eduarda	teste10	10
-Pedro Da Silva	neu queiroz	15
-Ana Maria   Alexandria  102
+VLADMYR GUEDES	MARTINS	22

@@ -38,10 +38,10 @@ int Contagem_clientes(FILE *arquivo)
 void add_clientes(int numero_clientes, Cliente **cliente){
     char nome[81],endereco[81];
     int index;
-    printf("Informe nome do novo cliente\n");
+    printf("Informe nome do novo cliente: ");
     scanf(" %[^\n]", nome);
 
-    printf("Informe endeço do novo cliente\n");
+    printf("Informe endereco do novo cliente: ");
     scanf(" %[^\n]", endereco);
 
     for(index=0;index<81;index++){
@@ -51,7 +51,7 @@ void add_clientes(int numero_clientes, Cliente **cliente){
     strcpy(cliente[(numero_clientes)]->nome,nome);
     strcpy(cliente[(numero_clientes)]->endereco,endereco);
 
-    printf("Informe o codigo do novo cliente\n");
+    printf("Informe o codigo do novo cliente: ");
     scanf("%d", &cliente[(numero_clientes)]->id_cliente);
 
     FILE *arquivo = fopen("listaclientes.txt", "a");
