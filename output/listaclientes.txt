@@ -1,11 +1,12 @@
-Abner Gama	teste1	2
-Nattan Lopes	teste2	1
-Leonardo Dantas	teste3	4
-Pedro Lucas	teste4	7
-HeitorDS Otaku	teste5	3
-Pedro Henrique	teste6	9
-Samuel Saturno	teste7	5
-Leticia Ruiva	teste8	8
-Maria Aparecida	teste9	6
-Maria Eduarda	teste10	10
-VLADMYR GUEDES	MARTINS	22
+Abner Gama	Alexandria	101
+Nattan Lopes	Alexandria	121
+Leonardo Dantas	Pau dos Ferros	606
+Pedro Lucas	Alexandria	111
+Pedro Henrinque	Pereiro	808
+Maria Aparecida	Sao Miguel	648
+Maria Eduarda	Sao miguel	746
+Vladmyr Guedes	Martins	784
+Gustavo Fontes	Pereiro	264
+Ana Laura	Campina	356
+
+
