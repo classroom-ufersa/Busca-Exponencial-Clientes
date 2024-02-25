@@ -176,13 +176,11 @@ void Exibir_listacliente(FILE *arquivo){//Exibe todos os clientes cadastrados no
 }
 
 void menu(){//Tela do menu principal
-    printf("*************************\n");
-    printf("******* BEM-VINDO *******\n");
-    printf("*************************\n\n");
-
+    printf("========= Bem-vindo =========\n\n");
     printf("1- Cadastrar novo cliente\n");
     printf("2- Buscar cliente por nome\n");
     printf("3- Buscar cliente por Id\n");
     printf("4- Mostrar lista de clientes\n");
     printf("5- Sair\n");
+    printf("-----------------------------\n");
 }
