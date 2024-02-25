@@ -38,10 +38,10 @@ int Contagem_clientes(FILE *arquivo)
 void add_clientes(int numero_clientes, Cliente **cliente){
     char nome[81],endereco[81];
     int index;
-    printf("Informe nome do novo cliente: ");
+    printf("Informe nome do novo cliente\n");
     scanf(" %[^\n]", nome);
 
-    printf("Informe endereco do novo cliente: ");
+    printf("Informe endeço do novo cliente\n");
     scanf(" %[^\n]", endereco);
 
     for(index=0;index<81;index++){
@@ -51,13 +51,23 @@ void add_clientes(int numero_clientes, Cliente **cliente){
     strcpy(cliente[(numero_clientes)]->nome,nome);
     strcpy(cliente[(numero_clientes)]->endereco,endereco);
 
-    printf("Informe o codigo do novo cliente: ");
+    printf("Informe o codigo do novo cliente\n");
     scanf("%d", &cliente[(numero_clientes)]->id_cliente);
 
     FILE *arquivo = fopen("listaclientes.txt", "a");
     fprintf(arquivo, "\n%s\t%s\t%d", cliente[(numero_clientes)]->nome, cliente[(numero_clientes)]->endereco, cliente[(numero_clientes)]->id_cliente);
 
     fclose(arquivo);
+}
+
+int verificar_id(Cliente ** cliente, int id_cliente, int numero_clientes){
+    int count;
+    for(count=0;count<numero_clientes;count++){
+        if(cliente[count]->id_cliente!=id_cliente){
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void OrganizarID(Cliente **cliente, int numero_clientes)
@@ -112,7 +122,7 @@ int BuscaExponencialID(Cliente **cliente, int id_busca, int numero_clientes)
     return BuscaBinariaId(cliente,end/2,fmin(end,numero_clientes-1),id_busca);
 }
 
-int BuscaExponencialNome(Cliente **cliente, char nome_busca[80], char numero_clientes)
+int BuscaExponencialNome(Cliente **cliente, char *nome_busca, char numero_clientes)
 {
     int index;
     for(index=0;index<81;index++){
@@ -129,7 +139,7 @@ int BuscaExponencialNome(Cliente **cliente, char nome_busca[80], char numero_cli
     return BuscaBinariaNome(cliente,end/2,fmin(end,numero_clientes-1),nome_busca);
 }
 
-int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome_busca[81])
+int BuscaBinariaNome(Cliente **clientes, int begin, int end, char *nome_busca)
 {
     if (end >= begin){
         int mid = begin + ((end - begin) / 2);
@@ -154,7 +164,6 @@ int BuscaBinariaId(Cliente **clientes, int begin, int end, int id_busca)
         }
         if (clientes[mid]->id_cliente > id_busca){
             return BuscaBinariaId(clientes,begin,mid-1,id_busca);
-            printf("as0\n");
         }
         return BuscaBinariaId(clientes,mid+1,end,id_busca); 
     }

@@ -52,10 +52,14 @@ int main(void){
                 printf("Cliente inexistente\n");
             }
             else{
-                capitalizeNames(cliente[posicao]->nome);
-                printf("Nome: %s\n",cliente[posicao]->nome);
-                printf("Endereco: %s\n",cliente[posicao]->endereco);
-                printf("Id: %d\n\n",cliente[posicao]->id_cliente);
+                strcpy(nome,cliente[numero_clientes]->nome);
+                strcpy(endereco,cliente[numero_clientes]->endereco);
+                id_cliente=cliente[posicao]->id_cliente;
+                capitalizeNames(nome);
+                capitalizeNames(endereco);
+                printf("Nome: %s\n",nome);
+                printf("Endereco: %s\n",endereco);
+                printf("Id: %d\n",id_cliente);
             }
             break;
         case '3':
@@ -63,14 +67,18 @@ int main(void){
             printf("Informe o id: ");
             scanf("%d",&id_busca);
             posicao=BuscaExponencialID(cliente,id_busca,numero_clientes);
-            if(posicao < 0){
+            if(posicao<0){
                 printf("Cliente inexistente\n");
             }
             else{
-                capitalizeNames(cliente[posicao]->nome);
-                printf("Nome: %s\n",cliente[posicao]->nome);
-                printf("Endereco: %s\n",cliente[posicao]->endereco);
-                printf("Id: %d\n\n",cliente[posicao]->id_cliente);
+                strcpy(nome,cliente[numero_clientes]->nome);
+                strcpy(endereco,cliente[numero_clientes]->endereco);
+                id_cliente=cliente[posicao]->id_cliente;
+                capitalizeNames(nome);
+                capitalizeNames(endereco);
+                printf("Nome: %s\n",nome);
+                printf("Endereco: %s\n",endereco);
+                printf("Id: %d\n",id_cliente);
             }
             break;
         case '4':
