@@ -3,7 +3,6 @@
 int main(void){
     int index=0, id_cliente, numero_clientes, id_busca, posicao;
     char nome[81], endereco[81], linha[100], opcao, opcao2, nome_busca[81];
-
     FILE * aLista=fopen("listaclientes.txt","r");
     numero_clientes=Contagem_clientes(aLista);
     Cliente ** cliente=(Cliente**)malloc(numero_clientes*sizeof(Cliente*));
@@ -20,16 +19,18 @@ int main(void){
         cliente[index] = preencher_clientes(nome,endereco,id_cliente);
         index++;
     }//da pra colocar esse while em uma função
+
     do{
         menu();
         scanf("%s",&opcao);
         switch (opcao){
         case '1':
-            do{
             numero_clientes = Contagem_clientes(aLista);
+            do{
             cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
             add_clientes(numero_clientes,cliente);
             numero_clientes++;
+
             printf("Deseja adicionar mais um novo cliente?\n(S) ou (N)\n");
             scanf(" %[^\n]",&opcao2);
             opcao2 = toupper(opcao2); //transforma o caracter em maiúsculo
@@ -46,7 +47,6 @@ int main(void){
             OrganizarNome(cliente,numero_clientes);
             printf("Informe o nome: ");
             scanf(" %[^\n]",nome_busca);
-            nome_busca[81] = toupper(nome_busca[81]);
             posicao=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
             if(posicao < 0){
                 printf("Cliente inexistente\n");
@@ -67,6 +67,7 @@ int main(void){
                 printf("Cliente inexistente\n");
             }
             else{
+                capitalizeNames(cliente[posicao]->nome);
                 printf("Nome: %s\n",cliente[posicao]->nome);
                 printf("Endereco: %s\n",cliente[posicao]->endereco);
                 printf("Id: %d\n\n",cliente[posicao]->id_cliente);
