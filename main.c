@@ -46,6 +46,7 @@ int main(void){
             OrganizarNome(cliente,numero_clientes);
             printf("Informe o nome: ");
             scanf(" %[^\n]",nome_busca);
+            nome_busca[81] = toupper(nome_busca[81]);
             posicao=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
             if(posicao < 0){
                 printf("Cliente inexistente\n");
