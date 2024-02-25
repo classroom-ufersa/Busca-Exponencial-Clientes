@@ -36,9 +36,7 @@ int Contagem_clientes(FILE * arquivo);
 void add_clientes(Cliente ***cliente, int *numero_clientes);
 //void add_clientes(int numero_clientes,Cliente **cliente);
 
-/**
-* @brief Escreve os valores recebidos no add_clientes dentro do arquivo .txt
-*/
+
 void escrever_arquivo(Cliente **cliente, int numero_clientes);
 
 

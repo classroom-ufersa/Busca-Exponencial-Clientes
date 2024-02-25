@@ -38,10 +38,7 @@ int Contagem_clientes(FILE *arquivo){
 }
 
 /*
-void add_clientes(int numero_clientes, Cliente **cliente){//Função para cadastrar novo cliente 
-=======
 void add_clientes(int numero_clientes, Cliente **cliente){
->>>>>>> 9218d6ac266aae1752656325abf49ac82bc48378
     char nome[81],endereco[81];
     int index;
 
@@ -113,9 +110,8 @@ void escrever_arquivo(Cliente **cliente, int numero_clientes) {
     fprintf(arquivo, "\n%s\t%s\t%d", cliente[numero_clientes - 1]->nome, cliente[numero_clientes - 1]->endereco, numero_clientes - 1);
 
     // Fecha o arquivo após a escrita
-    fclose(arquivo);
+     fclose(arquivo);
 }
-
 
 int verificar_id(Cliente ** cliente, int id_cliente, int numero_clientes){
     int count;
