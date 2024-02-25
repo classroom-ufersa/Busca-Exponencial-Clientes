@@ -33,6 +33,13 @@ int main(void){
             printf("Deseja adicionar mais um novo cliente?\n(S) ou (N)\n");
             scanf(" %[^\n]",&opcao2);
             opcao2 = toupper(opcao2); //transforma o caracter em maiúsculo
+
+            while(opcao2 != 'S' && opcao2 != 'N') {
+                printf("opcao invalida\nDigite (S) ou (N)\n");
+                scanf(" %[^\n]",&opcao2);
+                opcao2 = toupper(opcao2);
+            }
+
             } while (opcao2=='S');
             break;
         case '2':
