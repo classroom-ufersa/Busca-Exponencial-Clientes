@@ -31,6 +31,7 @@ int Contagem_clientes(FILE *arquivo){//Função que realiza a contagem de client
     return numero_clientes;
 }
 
+/*
 void add_clientes(int numero_clientes, Cliente **cliente){//Função para cadastrar novo cliente 
     char nome[81],endereco[81];
     int index;
@@ -50,6 +51,53 @@ void add_clientes(int numero_clientes, Cliente **cliente){//Função para cadast
     fprintf(arquivo, "\n%s\t%s\t%d", cliente[numero_clientes]->nome, cliente[numero_clientes]->endereco, cliente[numero_clientes]->id_cliente);//Cadastra as informações do novo cliente no arquivo
     fclose(arquivo);
 }
+*/
+
+void add_clientes(Cliente ***cliente, int *numero_clientes) {
+    char nome[81], endereco[81];
+
+    // Solicita nome e endereço do novo cliente
+    printf("Informe nome do novo cliente: ");
+    scanf(" %[^\n]", nome);
+
+    printf("Informe endereco do novo cliente: ");
+    scanf(" %[^\n]", endereco);
+
+    // Converte para maiúsculas
+    for (int index = 0; index < 81; index++) {
+        nome[index] = toupper(nome[index]);
+        endereco[index] = toupper(endereco[index]);
+    }
+
+    // Aumenta o tamanho do array usando realloc
+    *cliente = realloc(*cliente, (*numero_clientes + 1) * sizeof(Cliente *));
+    if (*cliente == NULL) {
+        printf("Erro ao realocar memória para o array de clientes.\n");
+        exit(1);
+    }
+
+    // Aloca memória para o novo cliente
+    (*cliente)[*numero_clientes] = preencher_clientes(nome, endereco, *numero_clientes);
+
+    // Incrementa o número de clientes
+    (*numero_clientes)++;
+}
+
+void escrever_arquivo(Cliente **cliente, int numero_clientes) {
+    // Abre o arquivo em modo de append
+    FILE *arquivo = fopen("listaclientes.txt", "a");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo para escrita.\n");
+        exit(1);
+    }
+
+    // Escreve o novo cliente no arquivo
+    fprintf(arquivo, "\n%s\t%s\t%d", cliente[numero_clientes - 1]->nome, cliente[numero_clientes - 1]->endereco, numero_clientes - 1);
+
+    // Fecha o arquivo após a escrita
+    fclose(arquivo);
+}
+
 
 int verificar_id(Cliente ** cliente, int id_cliente, int numero_clientes){//Verifica se existe algum cliente já cadastrado com o id informado
     int count;

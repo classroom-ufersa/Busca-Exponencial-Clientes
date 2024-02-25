@@ -7,7 +7,11 @@ typedef struct cliente Cliente;
 
 int Contagem_clientes(FILE * arquivo);
 
-void add_clientes(int numero_clientes,Cliente **cliente);
+//void add_clientes(int numero_clientes, Cliente **cliente);
+
+void add_clientes(Cliente ***cliente, int *numero_clientes);
+
+void escrever_arquivo(Cliente **cliente, int numero_clientes);
 
 int verificar_id(Cliente ** cliente, int id_cliente, int numero_clientes);
 
