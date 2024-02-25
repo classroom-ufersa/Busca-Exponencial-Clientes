@@ -7,19 +7,6 @@
 /*Definição de novo tipo: Cliente*/
 typedef struct cliente Cliente;
 
-/**
- * @brief Conta o número de clientes em um arquivo.
- * 
- * Esta função conta o número de clientes em um arquivo, onde cada linha do arquivo
- * representa um cliente.
- * 
- * @param arquivo Um ponteiro para um arquivo do tipo FILE contendo as informações dos clientes.
- *                O arquivo deve ser aberto antes de passar para a função.
- * 
- * @return O número total de clientes no arquivo.
- *         Retorna 0 se o arquivo estiver vazio ou se ocorrer algum erro de leitura.
- */
-
 
 /**
  * @brief Esta função conta o número de clientes presentes em um arquivo.
