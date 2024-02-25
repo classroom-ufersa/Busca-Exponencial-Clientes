@@ -36,7 +36,7 @@ void add_clientes(int numero_clientes, Cliente **cliente){//Função para cadast
     int index;
     printf("Informe nome do novo cliente\n");
     scanf(" %[^\n]", nome);
-    printf("Informe endeço do novo cliente\n");
+    printf("Informe endeco do novo cliente\n");
     scanf(" %[^\n]", endereco);
     for(index = 0;index < 81;index++){//Tranformação de todas as letras da váriavel em maiúsculas
         nome[index] = toupper(nome[index]);
