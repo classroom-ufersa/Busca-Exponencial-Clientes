@@ -9,7 +9,7 @@ Este é um simples sistema de cadastro de clientes em linguagem C. Ele permite a
 
 ## Funcionalidades
 
-1. **Cadastrar novo cliente:** Adiciona novos clientes informando nome, endereço e um código único para identificação (ID).
+1. **Cadastrar novo cliente:** Solicita ao usuário o nome, endereço e código do novo cliente, armazena essas informações na lista de clientes e também as registra no arquivo.
 
 2. **Buscar cliente por nome:** Realiza uma busca por nome de cliente, exibindo suas informações caso encontrado.
 
