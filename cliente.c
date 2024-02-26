@@ -6,37 +6,42 @@ struct cliente
     char endereco[81];
     int id_cliente;
 };
-// Cliente * preencher_clientes(char nome[81],char endereco[81],int id_cliente){
-Cliente *preencher_clientes(char *nome, char *endereco, int id_cliente)
-{
-    Cliente *a = (Cliente *)malloc(sizeof(Cliente));
-    if (a == NULL)
-    {
-        printf("erro!");
+
+Cliente *preencher_clientes(char *nome, char *endereco, int id_cliente){
+    Cliente *temp = (Cliente *)malloc(sizeof(Cliente)); //Alocação dinâmica das linhas da matriz cliente
+    if (temp == NULL) { //Verificação da alocação dinâmica
+        printf("Erro na alocacao, memoria insuficiente!");
+        exit(1);
     }
+
     int index;
-    for(index=0;index<81;index++){
+    //Tranformação de todas as letras da váriavel em maiúsculas
+    for(index = 0;index < 81;index++) { 
         nome[index]=toupper(nome[index]);
     }
-    strcpy(a->nome, nome);
-    strcpy(a->endereco, endereco);
-    a->id_cliente = id_cliente;
-    return a;
+
+    //função usada para copiar os valores entre duas strings
+    strcpy(temp->nome, nome);
+    strcpy(temp->endereco, endereco);
+    temp->id_cliente = id_cliente;
+    return temp;
 }
 
-int Contagem_clientes(FILE *arquivo)
-{
+int Contagem_clientes(FILE *arquivo){
     int numero_clientes = 0;
     char linha[100];
-    while (fgets(linha, 100, arquivo) != NULL)
-    {
+
+    //Navega cada linha do arquivo
+    while (fgets(linha, 100, arquivo) != NULL) { 
         numero_clientes++;
     }
     return numero_clientes;
 }
 
 void add_clientes(int numero_clientes, Cliente **cliente){
-    char nome[81],endereco[81];
+    char *nome =  (char*) malloc(81 * sizeof(char));
+    char *endereco =  (char*) malloc(81 * sizeof(char));
+
     int index;
     printf("Informe nome do novo cliente: ");
     scanf(" %[^\n]", nome);
@@ -44,20 +49,48 @@ void add_clientes(int numero_clientes, Cliente **cliente){
     printf("Informe endereco do novo cliente: ");
     scanf(" %[^\n]", endereco);
 
-    for(index=0;index<81;index++){
+    int nomet = (int)strlen(nome);
+    int enderecot = (int)strlen(endereco);
+    int id;
+    //Tranformação de todas as letras da váriavel em maiúsculas
+    for(index=0;index<nomet;index++){
         nome[index]=toupper(nome[index]);
+    }
+
+    for(index=0;index<enderecot;index++){
         endereco[index]=toupper(endereco[index]);
     }
-    strcpy(cliente[(numero_clientes)]->nome,nome);
-    strcpy(cliente[(numero_clientes)]->endereco,endereco);
 
-    printf("Informe o codigo do novo cliente: ");
-    scanf("%d", &cliente[(numero_clientes)]->id_cliente);
+    nome[nomet] = '\0';
+    endereco[enderecot] = '\0';
+
+    printf("Insira o id: ");
+    scanf(" %d", &id);
+    
+
+    verificar_id(cliente, id, numero_clientes);
+
+    while(verificar_id(cliente, id, numero_clientes) == 1){
+        printf("id ja existente, digite um novo: ");
+        scanf(" %d", &id);
+        verificar_id(cliente, id, numero_clientes);
+    }
+    cliente[numero_clientes] = preencher_clientes(nome,endereco,id);
 
     FILE *arquivo = fopen("listaclientes.txt", "a");
     fprintf(arquivo, "\n%s\t%s\t%d", cliente[(numero_clientes)]->nome, cliente[(numero_clientes)]->endereco, cliente[(numero_clientes)]->id_cliente);
 
     fclose(arquivo);
+}
+
+int verificar_id(Cliente ** cliente, int id_cliente, int numero_clientes){
+    int count;
+    for(count = 0;count < numero_clientes;count++){
+        if(cliente[count]->id_cliente == id_cliente){
+            return 1;
+        }
+    }
+    return 0;
 }
 
 void OrganizarID(Cliente **cliente, int numero_clientes)
@@ -198,13 +231,11 @@ void Exibir_listacliente(FILE *arquivo)
 }
 
 void menu(){
-    printf("*************************\n");
-    printf("******* BEM-VINDO *******\n");
-    printf("*************************\n\n");
-
+    printf("========= Bem-Vindo =========\n\n");
     printf("1- Cadastrar novo cliente\n");
     printf("2- Buscar cliente por nome\n");
     printf("3- Buscar cliente por Id\n");
     printf("4- Mostrar lista de clientes\n");
     printf("5- Sair\n");
+    printf("-----------------------------\n");
 }
