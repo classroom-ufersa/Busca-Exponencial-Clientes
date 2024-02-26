@@ -33,7 +33,7 @@ int Contagem_clientes(FILE * arquivo);
  * @param cliente Um ponteiro para um array de ponteiros para estruturas Cliente, representando a lista de clientes.
  *                A função assume que o array já tem espaço suficiente para armazenar o novo cliente.
  */
-void add_clientes(int numero_clientes,Cliente **cliente);
+void add_clientes(Cliente **cliente,int numero_clientes);
 
 
 /**
