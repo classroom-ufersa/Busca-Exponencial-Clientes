@@ -19,20 +19,27 @@ int main(void){
         sscanf(linha,"%[^\t]\t%[^\t]\t%d\n",nome,endereco,&id_cliente);
         cliente[index] = preencher_clientes(nome,endereco,id_cliente);
         index++;
-    }//da pra colocar esse while em uma função
+    }
     do{
         menu();
         scanf("%s",&opcao);
         switch (opcao){
         case '1':
             do{
-            numero_clientes = Contagem_clientes(aLista);
             cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
             add_clientes(numero_clientes,cliente);
             numero_clientes++;
+
             printf("Deseja adicionar mais um novo cliente?\n(S) ou (N)\n");
             scanf(" %[^\n]",&opcao2);
             opcao2 = toupper(opcao2); //transforma o caracter em maiúsculo
+
+            while(opcao2 != 'S' && opcao2 != 'N') {
+                printf("opcao invalida\nDigite (S) ou (N)\n");
+                scanf(" %[^\n]", &opcao2);
+                opcao2 = toupper(opcao2);
+            }
+
             } while (opcao2=='S');
             break;
         case '2':
