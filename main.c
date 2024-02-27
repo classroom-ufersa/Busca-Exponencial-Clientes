@@ -2,7 +2,7 @@
 
 int main(void){
     int index=0, id_cliente, numero_clientes, id_busca, posicao;
-    char nome[81], endereco[81], linha[100], opcao, opcao2, nome_busca[81];
+    char nome[81], endereco[81], linha[100], opcao[11], opcao2, nome_busca[81];
     clock_t inicio, fim;
     double tempo_decorrido;
 
@@ -24,27 +24,26 @@ int main(void){
     }
     do{
         menu();
-        scanf("%s",&opcao);
-        switch (opcao){
-        case '1':
+        scanf(" %[^\n]",opcao);
+        
+        if(strcmp(opcao,"1")==0){
             do{
-            cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
-            add_clientes(numero_clientes,cliente);
-            numero_clientes++;
+                cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
+                add_clientes(numero_clientes,cliente);
+                numero_clientes++;
 
-            printf("Deseja adicionar mais um novo cliente?\n(S) ou (N)\n");
-            scanf(" %[^\n]",&opcao2);
-            opcao2 = toupper(opcao2); //transforma o caracter em maiúsculo
+                printf("Deseja adicionar mais um novo cliente?\n(S) ou (N)\n");
+                scanf(" %[^\n]",&opcao2);
+                opcao2 = toupper(opcao2); //transforma o caracter em maiúsculo
 
-            while(opcao2 != 'S' && opcao2 != 'N') {
-                printf("opcao invalida\nDigite (S) ou (N)\n");
-                scanf(" %[^\n]", &opcao2);
-                opcao2 = toupper(opcao2);
-            }
-
+                while(opcao2 != 'S' && opcao2 != 'N') {
+                    printf("opcao invalida\nDigite (S) ou (N)\n");
+                    scanf(" %[^\n]", &opcao2);
+                    opcao2 = toupper(opcao2);
+                }
             } while (opcao2=='S');
-            break;
-        case '2':
+        }
+        else if(strcmp(opcao,"2")==0){
             OrganizarNome(cliente,numero_clientes);
             printf("Informe o nome: ");
             scanf(" %[^\n]",nome_busca);
@@ -71,8 +70,8 @@ int main(void){
             fim = clock();
             tempo_decorrido = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
             printf("Tempo de execucao: %f segundos\n", tempo_decorrido);
-            break;
-        case '3':
+        }
+        else if(strcmp(opcao,"3")==0){
             OrganizarID(cliente,numero_clientes);
             printf("Informe o id: ");
             scanf("%d",&id_busca);
@@ -91,18 +90,17 @@ int main(void){
             fim = clock();
             tempo_decorrido = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
             printf("Tempo de execucao: %f segundos\n", tempo_decorrido);
-            break;
-        case '4':
-            Exibir_listacliente(aLista);
-            break;
-        case '5':
-            printf("Obrigado pela preferencia");
-            break;
-        default:
-            printf("Opcao invalida\n\n");
-            break;
         }
-    } while (opcao!='5');
+        else if(strcmp(opcao,"4")==0){
+            Exibir_listacliente(aLista);
+        }
+        else if(strcmp(opcao,"5")==0){
+            printf("Obrigado pela preferencia");
+        }
+        else{
+            printf("Opcao invalida\n\n");
+        }
+    } while (strcmp(opcao,"5")!=0);
     
     fclose(aLista);
     for(index = 0;index < numero_clientes; index++){
