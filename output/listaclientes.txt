@@ -1,19 +1,20 @@
 Abner Gama	Alexandria	101
-Nattan Lopes	Alexandria	121
-Leonardo Dantas	Pau dos Ferros	606
-Pedro Lucas	Alexandria	111
-Pedro Henrinque	Pereiro	808
-Maria Aparecida	Sao Miguel	648
-Maria Eduarda	Sao miguel	746
-Vladmyr Guedes	Martins	784
-Gustavo Fontes	Pereiro	264
-Ana Laura	Campina	356
-Marianny Naiara	Alexandria	46
-Jose Emanuel	Sao Miguel	610
-Marcelo Henrique	Portalegre	84
-Gustavo Silva	Agua Nova	67
-Daniel Silva	Frutuoso	888
-Cleiton Rasta	Serrinha	79
-Yasmin	Alexandria	101
-Pedro Joao	Alexandria	101
-Johanzinho	Frutuoso	123
+Nattan Lopes	Alexandria	102
+Leonardo Dantas	Pau dos Ferros	103
+Pedro Lucas	Alexandria	104
+Pedro Henrinque	Pereiro	105
+Maria Aparecida	Sao Miguel	106
+Maria Eduarda	Sao miguel	107
+Vladmyr Guedes	Martins	108
+Gustavo Fontes	Pereiro	109
+Ana Laura	Campina	110
+Marianny Naiara	Alexandria	111
+Jose Emanuel	Sao Miguel	112
+Marcelo Henrique	Portalegre	113
+Gustavo Silva	Agua Nova	114
+Daniel Silva	Frutuoso	115
+Cleiton Rasta	Serrinha	116
+Yasmin	Alexandria	117
+Pedro Joao	Alexandria	118
+Johanzinho	Frutuoso	119
+Pedro Lucas Amorim	Sao Miguel	120

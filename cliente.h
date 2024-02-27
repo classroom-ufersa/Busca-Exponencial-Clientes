@@ -38,16 +38,15 @@ void add_clientes(int numero_clientes,Cliente **cliente);
 
 
 /**
- * @brief Verifica se o código do cliente já existe na lista de clientes.
+ * @brief Verifica se o nome informado é valido.
  * 
- * Esta função verifica se o código do cliente fornecido já existe na lista de clientes.
+ * Esta função verifica se o nome fornecido pelo cliente possui caracteres invalidos.
  * 
- * @param cliente Um ponteiro para um array de ponteiros para estruturas Cliente, representando a lista de clientes.
- * @param id_cliente O código do cliente a ser verificado.
- * @param numero_clientes O número total de clientes na lista.
- * @return Retorna 1 se o código do cliente NÃO existir na lista, caso contrário retorna 0.
+ * @param nome Uma string representando o nome do cliente.
+ * 
+ * @return Retorna 1 se o nome seja invalido, caso contrário retorna 0.
  */
-int verificar_id(Cliente ** cliente, int id_cliente, int numero_clientes);
+int verificar_nome(char * nome);
 
 
 /**
@@ -198,7 +197,3 @@ void Exibir_listacliente(FILE * arquivo);
  * @note Esta função não recebe parâmetros nem retorna valores.
  */
 void menu();
-
-int verificar_id(Cliente **cliente, int id, int numero_clientes);
-
-int verificar_nome(char * nome);

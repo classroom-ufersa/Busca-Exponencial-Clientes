@@ -41,7 +41,7 @@ int Contagem_clientes(FILE *arquivo){
 void add_clientes(int numero_clientes, Cliente **cliente){
     char *nome =  (char*) malloc(81 * sizeof(char));
     char *endereco =  (char*) malloc(81 * sizeof(char));
-    int index,id;
+    int index;
 
     printf("Informe nome do novo cliente: ");
     scanf(" %[^\n]", nome);
@@ -63,19 +63,6 @@ void add_clientes(int numero_clientes, Cliente **cliente){
 
     int enderecot = (int)strlen(endereco);
     endereco[enderecot] = '\0';
-    
-    printf("Insira o id: ");
-    scanf(" %d", &id);
-    
-    verificar_id(cliente, id, numero_clientes);
-
-    while(verificar_id(cliente, id, numero_clientes) == 1){
-        if(verificar_id(cliente, id, numero_clientes) == 1){
-            printf("Id ja existente, digite um novo: ");
-            scanf(" %d", &id);
-        }
-        verificar_id(cliente, id, numero_clientes);
-    }
 
     for(index=0;index<nomet;index++){
         nome[index]=toupper(nome[index]);
@@ -84,13 +71,13 @@ void add_clientes(int numero_clientes, Cliente **cliente){
     for(index=0;index<enderecot;index++){
         endereco[index]=toupper(endereco[index]);
     }
-    cliente[numero_clientes] = preencher_clientes(nome,endereco,id);
+    cliente[numero_clientes] = preencher_clientes(nome,endereco,numero_clientes+101);
 
     capitalizeNames(nome);
     capitalizeNames(endereco);
 
     FILE *arquivo = fopen("listaclientes.txt", "a");
-    fprintf(arquivo, "\n%s\t%s\t%d", nome, endereco, id);
+    fprintf(arquivo, "\n%s\t%s\t%d", nome, endereco, numero_clientes+101);
 
     fclose(arquivo);
 }
@@ -98,34 +85,20 @@ void add_clientes(int numero_clientes, Cliente **cliente){
 int verificar_nome(char * nome){
     for (int i = 0; nome[i] != '\0'; i++) {
         // Verifica se o caractere atual é uma letra
-        if (!isalpha(nome[i])){
+        if (!isalpha(nome[i]) && nome[i]!=' '){
             return 1;
         }
     }
     return 0;
 }
 
-int verificar_id(Cliente ** cliente,  int id_cliente, int numero_clientes){
-    int count;
-    for(count = 0;count < numero_clientes;count++){
-        if(cliente[count]->id_cliente == id_cliente){
-            return 1;
-        }
-    }
-    return 0;
-}
-
-void OrganizarID(Cliente **cliente, int numero_clientes)
-{
+void OrganizarID(Cliente **cliente, int numero_clientes){
     int count1, count2;
     Cliente *a = (Cliente *)malloc(sizeof(Cliente));
     a = cliente[0];
-    for (count1 = 0; count1 < numero_clientes; count1++)
-    {
-        for (count2 = 0; count2 < numero_clientes - 1; count2++)
-        {
-            if (cliente[count2]->id_cliente > cliente[count2 + 1]->id_cliente)
-            {
+    for (count1 = 0; count1 < numero_clientes; count1++){
+        for (count2 = 0; count2 < numero_clientes - 1; count2++){
+            if (cliente[count2]->id_cliente > cliente[count2 + 1]->id_cliente){
                 a = cliente[count2];
                 cliente[count2] = cliente[count2 + 1];
                 cliente[count2 + 1] = a;
@@ -134,17 +107,13 @@ void OrganizarID(Cliente **cliente, int numero_clientes)
     }
 }
 
-void OrganizarNome(Cliente **cliente, int numero_clientes)
-{
+void OrganizarNome(Cliente **cliente, int numero_clientes){
     int count1, count2;
     Cliente *a = (Cliente *)malloc(sizeof(Cliente));
     a = cliente[0];
-    for (count1 = 0; count1 < numero_clientes; count1++)
-    {
-        for (count2 = 0; count2 < numero_clientes - 1; count2++)
-        {
-            if (strcmp(cliente[count2]->nome, cliente[count2 + 1]->nome) > 0)
-            {
+    for (count1 = 0; count1 < numero_clientes; count1++){
+        for (count2 = 0; count2 < numero_clientes - 1; count2++){
+            if (strcmp(cliente[count2]->nome, cliente[count2 + 1]->nome) > 0){
                 a = cliente[count2];
                 cliente[count2] = cliente[count2 + 1];
                 cliente[count2 + 1] = a;
@@ -153,28 +122,23 @@ void OrganizarNome(Cliente **cliente, int numero_clientes)
     }
 }
 
-int BuscaExponencialID(Cliente **cliente, int id_busca, int numero_clientes)
-{
-    if (id_busca == cliente[0]->id_cliente)
-    {
+int BuscaExponencialID(Cliente **cliente, int id_busca, int numero_clientes){
+    if (id_busca == cliente[0]->id_cliente){
         return 0;
     }
     int end = 1;
-    while (end < numero_clientes && cliente[end]->id_cliente <= id_busca)
-    {
+    while (end < numero_clientes && cliente[end]->id_cliente <= id_busca){
         end *= 2;
     }
     return BuscaBinariaId(cliente,end/2,fmin(end,numero_clientes-1),id_busca);
 }
 
-int BuscaExponencialNome(Cliente **cliente, char nome_busca[80], char numero_clientes)
-{
+int BuscaExponencialNome(Cliente **cliente, char nome_busca[80], char numero_clientes){
     int index;
     for(index=0;index<81;index++){
         nome_busca[index]=toupper(nome_busca[index]);
     }
-    if ((strcmp(cliente[0]->nome, nome_busca)) == 0)
-    {
+    if ((strcmp(cliente[0]->nome, nome_busca)) == 0){
         return 0;
     }
     int end=1;
@@ -198,17 +162,14 @@ int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome_busca[81]
     return -1;
 }
 
-int BuscaBinariaId(Cliente **clientes, int begin, int end, int id_busca)
-{
-    if (end >= begin)
-    {
+int BuscaBinariaId(Cliente **clientes, int begin, int end, int id_busca){
+    if (end >= begin){
         int mid = begin + (end-begin)/2;
         if (clientes[mid]->id_cliente == id_busca){
             return mid;
         }
         if (clientes[mid]->id_cliente > id_busca){
             return BuscaBinariaId(clientes,begin,mid-1,id_busca);
-            printf("as0\n");
         }
         return BuscaBinariaId(clientes,mid+1,end,id_busca); 
     }
@@ -236,13 +197,11 @@ void capitalizeNames(char *str) {
     }
 }
 
-void Exibir_listacliente(FILE *arquivo)
-{
+void Exibir_listacliente(FILE *arquivo){
     char linha[100], nome[81], endereco[81];
     int id_cliente;
     rewind(arquivo);
-    while (fgets(linha, 100, arquivo) != NULL)
-    {
+    while (fgets(linha, 100, arquivo) != NULL){
         sscanf(linha, "%[^\t]\t%[^\t]\t%d\n", nome, endereco, &id_cliente);
         printf("%s\t", nome);
         printf("%s\t", endereco);
