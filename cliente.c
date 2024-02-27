@@ -41,18 +41,42 @@ int Contagem_clientes(FILE *arquivo){
 void add_clientes(int numero_clientes, Cliente **cliente){
     char *nome =  (char*) malloc(81 * sizeof(char));
     char *endereco =  (char*) malloc(81 * sizeof(char));
+    int index,id;
 
-    int index;
     printf("Informe nome do novo cliente: ");
     scanf(" %[^\n]", nome);
 
+    int nomet = (int)strlen(nome);
+    nome[nomet] = '\0';
+    
+    verificar_nome(nome);
+
+    while(verificar_nome(nome)==1){
+        printf("Nome invalido\n\n");
+        printf("Informe nome do novo cliente: ");
+        scanf(" %[^\n]", nome);
+        verificar_nome(nome);
+    }
+    
     printf("Informe endereco do novo cliente: ");
     scanf(" %[^\n]", endereco);
 
-    int nomet = (int)strlen(nome);
     int enderecot = (int)strlen(endereco);
-    int id;
-    //Tranformação de todas as letras da váriavel em maiúsculas
+    endereco[enderecot] = '\0';
+    
+    printf("Insira o id: ");
+    scanf(" %d", &id);
+    
+    verificar_id(cliente, id, numero_clientes);
+
+    while(verificar_id(cliente, id, numero_clientes) == 1){
+        if(verificar_id(cliente, id, numero_clientes) == 1){
+            printf("Id ja existente, digite um novo: ");
+            scanf(" %d", &id);
+        }
+        verificar_id(cliente, id, numero_clientes);
+    }
+
     for(index=0;index<nomet;index++){
         nome[index]=toupper(nome[index]);
     }
@@ -60,30 +84,28 @@ void add_clientes(int numero_clientes, Cliente **cliente){
     for(index=0;index<enderecot;index++){
         endereco[index]=toupper(endereco[index]);
     }
-
-    nome[nomet] = '\0';
-    endereco[enderecot] = '\0';
-
-    printf("Insira o id: ");
-    scanf(" %d", &id);
-    
-
-    verificar_id(cliente, id, numero_clientes);
-
-    while(verificar_id(cliente, id, numero_clientes) == 1){
-        printf("id ja existente, digite um novo: ");
-        scanf(" %d", &id);
-        verificar_id(cliente, id, numero_clientes);
-    }
     cliente[numero_clientes] = preencher_clientes(nome,endereco,id);
 
+    capitalizeNames(nome);
+    capitalizeNames(endereco);
+
     FILE *arquivo = fopen("listaclientes.txt", "a");
-    fprintf(arquivo, "\n%s\t%s\t%d", cliente[(numero_clientes)]->nome, cliente[(numero_clientes)]->endereco, cliente[(numero_clientes)]->id_cliente);
+    fprintf(arquivo, "\n%s\t%s\t%d", nome, endereco, id);
 
     fclose(arquivo);
 }
 
-int verificar_id(Cliente ** cliente, int id_cliente, int numero_clientes){
+int verificar_nome(char * nome){
+    for (int i = 0; nome[i] != '\0'; i++) {
+        // Verifica se o caractere atual é uma letra
+        if (!isalpha(nome[i])){
+            return 1;
+        }
+    }
+    return 0;
+}
+
+int verificar_id(Cliente ** cliente,  int id_cliente, int numero_clientes){
     int count;
     for(count = 0;count < numero_clientes;count++){
         if(cliente[count]->id_cliente == id_cliente){
@@ -162,8 +184,7 @@ int BuscaExponencialNome(Cliente **cliente, char nome_busca[80], char numero_cli
     return BuscaBinariaNome(cliente,end/2,fmin(end,numero_clientes-1),nome_busca);
 }
 
-int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome_busca[81])
-{
+int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome_busca[81]){
     if (end >= begin){
         int mid = begin + ((end - begin) / 2);
         if (strcmp(clientes[mid]->nome, nome_busca) == 0){
@@ -195,7 +216,6 @@ int BuscaBinariaId(Cliente **clientes, int begin, int end, int id_busca)
 }
 
 void capitalizeNames(char *str) {
-    // Indica se a próxima letra deve ser transformada em maiúscula
     int capitalizeNext = 1;
 
     // Itera sobre cada caractere na string

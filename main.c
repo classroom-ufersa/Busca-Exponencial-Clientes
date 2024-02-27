@@ -3,6 +3,8 @@
 int main(void){
     int index=0, id_cliente, numero_clientes, id_busca, posicao;
     char nome[81], endereco[81], linha[100], opcao, opcao2, nome_busca[81];
+    clock_t inicio, fim;
+    double tempo_decorrido;
 
     FILE * aLista=fopen("listaclientes.txt","r");
     numero_clientes=Contagem_clientes(aLista);
@@ -46,6 +48,7 @@ int main(void){
             OrganizarNome(cliente,numero_clientes);
             printf("Informe o nome: ");
             scanf(" %[^\n]",nome_busca);
+            inicio = clock();
             posicao=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
             if(posicao<0){
                 printf("Cliente inexistente\n");
@@ -56,20 +59,29 @@ int main(void){
                 printf("Endereco: %s\n",cliente[posicao]->endereco);
                 printf("Id: %d\n\n",cliente[posicao]->id_cliente);
             }
+            fim = clock();
+            tempo_decorrido = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+            printf("Tempo de execucao: %f segundos\n", tempo_decorrido);
             break;
         case '3':
             OrganizarID(cliente,numero_clientes);
             printf("Informe o id: ");
             scanf("%d",&id_busca);
+            inicio = clock();
             posicao=BuscaExponencialID(cliente,id_busca,numero_clientes);
             if(posicao < 0){
                 printf("Cliente inexistente\n");
             }
             else{
+                capitalizeNames(cliente[posicao]->nome);
+                capitalizeNames(cliente[posicao]->endereco);
                 printf("Nome: %s\n",cliente[posicao]->nome);
                 printf("Endereco: %s\n",cliente[posicao]->endereco);
                 printf("Id: %d\n\n",cliente[posicao]->id_cliente);
             }
+            fim = clock();
+            tempo_decorrido = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
+            printf("Tempo de execucao: %f segundos\n", tempo_decorrido);
             break;
         case '4':
             Exibir_listacliente(aLista);

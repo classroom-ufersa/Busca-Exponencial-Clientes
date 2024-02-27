@@ -3,6 +3,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <math.h>
+#include <time.h>
 
 /*Definição de novo tipo: Cliente*/
 typedef struct cliente Cliente;
@@ -199,3 +200,5 @@ void Exibir_listacliente(FILE * arquivo);
 void menu();
 
 int verificar_id(Cliente **cliente, int id, int numero_clientes);
+
+int verificar_nome(char * nome);

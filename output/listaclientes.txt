@@ -8,14 +8,12 @@ Maria Eduarda	Sao miguel	746
 Vladmyr Guedes	Martins	784
 Gustavo Fontes	Pereiro	264
 Ana Laura	Campina	356
-KENNEDY ALVES	SANTA CRUZ	456
-PEDRO PAULO	CORONEL	473
-JOAO PAULO	SANTA CRUZ	672
-GUILHERME SARMENTO	PAU DOS FERROS	496
-JOSE EMANUEL	SAO MIGUEL	782
-JOSE EMANUEL	SAO MIGUEL	14
-JOSE EMANUEL	SAO MIGUEL	15
-PEDRO RAULINO	FRUTUOSO	17
-PELUCA	FRUTUOSO	123
-FERNANDO HENRIQUE	FRUTUOSO	555
-ROG‚RIO CARDOSO	ALEXANDRIA	3527
+Marianny Naiara	Alexandria	46
+Jose Emanuel	Sao Miguel	610
+Marcelo Henrique	Portalegre	84
+Gustavo Silva	Agua Nova	67
+Daniel Silva	Frutuoso	888
+Cleiton Rasta	Serrinha	79
+Yasmin	Alexandria	101
+Pedro Joao	Alexandria	101
+Johanzinho	Frutuoso	123
