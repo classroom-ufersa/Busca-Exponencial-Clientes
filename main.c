@@ -48,6 +48,15 @@ int main(void){
             OrganizarNome(cliente,numero_clientes);
             printf("Informe o nome: ");
             scanf(" %[^\n]",nome_busca);
+
+            verificar_nome(nome_busca);
+
+            while(verificar_nome(nome_busca)==1){
+                printf("Nome invalido\n\n");
+                printf("Informe nome novamente: ");
+                scanf(" %[^\n]", nome_busca);
+                verificar_nome(nome_busca);
+            }
             inicio = clock();
             posicao=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
             if(posicao<0){
