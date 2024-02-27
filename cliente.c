@@ -8,19 +8,17 @@ struct cliente
 };
 
 Cliente *preencher_clientes(char *nome, char *endereco, int id_cliente){
-    Cliente *temp = (Cliente *)malloc(sizeof(Cliente)); //Alocação dinâmica das linhas da matriz cliente
-    if (temp == NULL) { //Verificação da alocação dinâmica
+    Cliente *temp = (Cliente *)malloc(sizeof(Cliente)); 
+    if (temp == NULL) { 
         printf("Erro na alocacao, memoria insuficiente!");
         exit(1);
     }
 
     int index;
-    //Tranformação de todas as letras da váriavel em maiúsculas
     for(index = 0;index < 81;index++) { 
         nome[index]=toupper(nome[index]);
     }
 
-    //função usada para copiar os valores entre duas strings
     strcpy(temp->nome, nome);
     strcpy(temp->endereco, endereco);
     temp->id_cliente = id_cliente;
@@ -31,7 +29,6 @@ int Contagem_clientes(FILE *arquivo){
     int numero_clientes = 0;
     char linha[100];
 
-    //Navega cada linha do arquivo
     while (fgets(linha, 100, arquivo) != NULL) { 
         numero_clientes++;
     }
@@ -84,7 +81,6 @@ void add_clientes(int numero_clientes, Cliente **cliente){
 
 int verificar_nome(char * nome){
     for (int i = 0; nome[i] != '\0'; i++) {
-        // Verifica se o caractere atual é uma letra
         if (!isalpha(nome[i]) && nome[i]!=' '){
             return 1;
         }
@@ -179,19 +175,15 @@ int BuscaBinariaId(Cliente **clientes, int begin, int end, int id_busca){
 void capitalizeNames(char *str) {
     int capitalizeNext = 1;
 
-    // Itera sobre cada caractere na string
     for (int i = 0; str[i] != '\0'; i++) {
-        // Verifica se o caractere atual é uma letra
         if (isalpha(str[i])) {
-            // Transforma a letra em maiúscula se necessário
             if (capitalizeNext) {
                 str[i] = toupper(str[i]);
-                capitalizeNext = 0; // Desativa a transformação para o próximo caractere
+                capitalizeNext = 0; 
             } else {
                 str[i] = tolower(str[i]);
             }
         } else {
-            // Se o caractere não for uma letra, ativa a transformação para o próximo
             capitalizeNext = 1;
         }
     }
