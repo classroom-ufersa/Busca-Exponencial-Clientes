@@ -4,6 +4,8 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <conio.h>
+#include <windows.h>
 
 /*Definição de novo tipo: Cliente*/
 typedef struct cliente Cliente;
@@ -197,3 +199,26 @@ void Exibir_listacliente(FILE * arquivo);
  * @note Esta função não recebe parâmetros nem retorna valores.
  */
 void menu();
+
+
+/**
+ * @brief Limpa a tela do console.
+ * 
+ * Esta função limpa a tela do console usando o comando do sistema "cls" no Windows.
+ * É importante notar que essa função é específica para sistemas Windows que utilizam o comando "cls"
+ * para limpar a tela. Em sistemas Unix-like, como Linux e macOS, o comando equivalente seria "clear".
+ * 
+ * Esta função não recebe parâmetros e não retorna nenhum valor.
+ */
+void limpa_tela();
+
+
+/**
+ * @brief Aguarda o usuário pressionar a tecla ENTER para continuar a execução.
+ * 
+ * Esta função exibe uma mensagem para o usuário e aguarda até que o usuário pressione a tecla ENTER.
+ * É útil para pausar a execução do programa e aguardar a interação do usuário antes de continuar.
+ * 
+ * Esta função não recebe parâmetros e não retorna nenhum valor.
+ */
+void pressiona_enter();
