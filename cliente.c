@@ -14,8 +14,11 @@ Cliente *preencher_clientes(char *nome, char *endereco, int id_cliente){
         exit(1);
     }
 
+    int nomet = (int)strlen(nome);
+    nome[nomet] = '\0';
+
     int index;
-    for(index = 0;index < 81;index++) { 
+    for(index = 0;index <= nomet;index++) { 
         nome[index]=toupper(nome[index]);
     }
 
@@ -38,13 +41,16 @@ int Contagem_clientes(FILE *arquivo){
 void add_clientes(int numero_clientes, Cliente **cliente){
     char *nome =  (char*) malloc(81 * sizeof(char));
     char *endereco =  (char*) malloc(81 * sizeof(char));
+    if (nome == NULL || endereco == NULL){
+        printf("Erro de alocacao, memoria insuficiente");
+        exit(1);
+    }
     int index;
-
     printf("Informe nome do novo cliente: ");
     scanf(" %[^\n]", nome);
     limpa_tela();
 
-    int nomet = (int)strlen(nome);
+    int nomet= (int)strlen(nome);
     nome[nomet] = '\0';
     
     verificar_nome(nome);
@@ -67,9 +73,7 @@ void add_clientes(int numero_clientes, Cliente **cliente){
         nome[index]=toupper(nome[index]);
     }
 
-    for(index=0;index<enderecot;index++){
-        endereco[index]=toupper(endereco[index]);
-    }
+
     cliente[numero_clientes] = preencher_clientes(nome,endereco,numero_clientes+101);
 
     capitalizeNames(nome);
@@ -93,6 +97,10 @@ int verificar_nome(char * nome){
 void OrganizarID(Cliente **cliente, int numero_clientes){
     int count1, count2;
     Cliente *a = (Cliente *)malloc(sizeof(Cliente));
+    if (a == NULL){
+        printf("Erro de alocacao, memoria insuficiente");
+        exit(1);
+    }
     a = cliente[0];
     for (count1 = 0; count1 < numero_clientes; count1++){
         for (count2 = 0; count2 < numero_clientes - 1; count2++){
@@ -108,6 +116,10 @@ void OrganizarID(Cliente **cliente, int numero_clientes){
 void OrganizarNome(Cliente **cliente, int numero_clientes){
     int count1, count2;
     Cliente *a = (Cliente *)malloc(sizeof(Cliente));
+    if (a == NULL){
+        printf("Erro de alocacao, memoria insuficiente");
+    }
+
     a = cliente[0];
     for (count1 = 0; count1 < numero_clientes; count1++){
         for (count2 = 0; count2 < numero_clientes - 1; count2++){

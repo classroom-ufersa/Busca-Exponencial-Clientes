@@ -7,6 +7,10 @@ int main(void){
     double tempo_decorrido;
 
     FILE * aLista=fopen("listaclientes.txt","r");
+    if (aLista == NULL){
+        printf("Erro de abertura de arquivo");
+        exit(1);
+    }
     numero_clientes=Contagem_clientes(aLista);
     Cliente ** cliente=(Cliente**)malloc(numero_clientes*sizeof(Cliente*));
     if(cliente == NULL){
@@ -14,9 +18,6 @@ int main(void){
         exit(1);
     }
     rewind(aLista);
-    if(cliente == NULL){
-        printf("erro!\n");
-    }
     while(fgets(linha, 100, aLista) != NULL){
         sscanf(linha,"%[^\t]\t%[^\t]\t%d\n",nome,endereco,&id_cliente);
         cliente[index] = preencher_clientes(nome,endereco,id_cliente);
@@ -120,6 +121,8 @@ int main(void){
         }
         else{
             printf("Opcao invalida\n\n");
+            pressiona_enter();
+            limpa_tela();
         }
     } while (strcmp(opcao,"5")!=0);
     
