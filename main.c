@@ -28,33 +28,41 @@ int main(void){
         
         if(strcmp(opcao,"1")==0){
             do{
+                limpa_tela();
                 cliente=realloc(cliente,(numero_clientes+1)*sizeof(Cliente*));
                 add_clientes(numero_clientes,cliente);
                 numero_clientes++;
+                limpa_tela();
 
                 printf("Deseja adicionar mais um novo cliente?\n(S) ou (N)\n");
                 scanf(" %[^\n]",&opcao2);
-                opcao2 = toupper(opcao2); 
+                opcao2 = toupper(opcao2);
+                limpa_tela();
 
                 while(opcao2 != 'S' && opcao2 != 'N') {
-                    printf("opcao invalida\nDigite (S) ou (N)\n");
+                    printf("Opcao invalida\n\nDigite (S) ou (N)\n");
                     scanf(" %[^\n]", &opcao2);
                     opcao2 = toupper(opcao2);
+                    Sleep(1);
+                    limpa_tela();
                 }
             } while (opcao2=='S');
         }
         else if(strcmp(opcao,"2")==0){
+            limpa_tela();
             OrganizarNome(cliente,numero_clientes);
             printf("Informe o nome: ");
             scanf(" %[^\n]",nome_busca);
-
             verificar_nome(nome_busca);
+
+            limpa_tela(); 
 
             while(verificar_nome(nome_busca)==1){
                 printf("Nome invalido\n\n");
-                printf("Informe nome novamente: ");
+                printf("Informe o nome novamente: ");
                 scanf(" %[^\n]", nome_busca);
                 verificar_nome(nome_busca);
+                limpa_tela();         
             }
             inicio = clock();
             posicao=BuscaExponencialNome(cliente,nome_busca,numero_clientes);
@@ -70,11 +78,17 @@ int main(void){
             fim = clock();
             tempo_decorrido = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
             printf("Tempo de execucao: %f segundos\n", tempo_decorrido);
+            
+            pressiona_enter();
+            limpa_tela();
         }
         else if(strcmp(opcao,"3")==0){
+            limpa_tela();
             OrganizarID(cliente,numero_clientes);
             printf("Informe o id: ");
             scanf("%d",&id_busca);
+            limpa_tela();
+
             inicio = clock();
             posicao=BuscaExponencialID(cliente,id_busca,numero_clientes);
             if(posicao < 0){
@@ -90,12 +104,19 @@ int main(void){
             fim = clock();
             tempo_decorrido = ((double)(fim - inicio)) / CLOCKS_PER_SEC;
             printf("Tempo de execucao: %f segundos\n", tempo_decorrido);
+
+            pressiona_enter();
+            limpa_tela();
         }
         else if(strcmp(opcao,"4")==0){
+            limpa_tela();
             Exibir_listacliente(aLista);
+
+            pressiona_enter();
+            limpa_tela();
         }
         else if(strcmp(opcao,"5")==0){
-            printf("Obrigado pela preferencia");
+            printf("Saindo...");
         }
         else{
             printf("Opcao invalida\n\n");

@@ -42,6 +42,7 @@ void add_clientes(int numero_clientes, Cliente **cliente){
 
     printf("Informe nome do novo cliente: ");
     scanf(" %[^\n]", nome);
+    limpa_tela();
 
     int nomet = (int)strlen(nome);
     nome[nomet] = '\0';
@@ -53,6 +54,7 @@ void add_clientes(int numero_clientes, Cliente **cliente){
         printf("Informe nome do novo cliente: ");
         scanf(" %[^\n]", nome);
         verificar_nome(nome);
+        limpa_tela();
     }
     
     printf("Informe endereco do novo cliente: ");
@@ -130,18 +132,18 @@ int BuscaExponencialID(Cliente **cliente, int id_busca, int numero_clientes){
 }
 
 int BuscaExponencialNome(Cliente **cliente, char nome_busca[80], char numero_clientes){
-    int index;
+    int index; //1 vez: c1
     for(index=0;index<81;index++){
-        nome_busca[index]=toupper(nome_busca[index]);
+        nome_busca[index]=toupper(nome_busca[index]); //n - 1 vezes: (n - 1) * c2
     }
     if ((strcmp(cliente[0]->nome, nome_busca)) == 0){
-        return 0;
+        return 0; // 1 vez: c3
     }
-    int end=1;
+    int end=1; // 1 vez: c4
     while(end<numero_clientes && (strcmp(cliente[end]->nome,nome_busca))<=0){
-        end*=2;
+        end*=2; //n/2 vezes = (n/2) * c5
     }
-    return BuscaBinariaNome(cliente,end/2,fmin(end,numero_clientes-1),nome_busca);
+    return BuscaBinariaNome(cliente,end/2,fmin(end,numero_clientes-1),nome_busca); //log n vezes = log n * c6
 }
 
 int BuscaBinariaNome(Cliente **clientes, int begin, int end, char nome_busca[81]){
@@ -209,4 +211,14 @@ void menu(){
     printf("4- Mostrar lista de clientes\n");
     printf("5- Sair\n");
     printf("-----------------------------\n");
+}
+
+void pressiona_enter(){
+    printf("\nPressione ENTER para continuar.");
+    while (getchar() != '\n');
+    getchar();
+}
+
+void limpa_tela(){
+    system("cls");
 }
